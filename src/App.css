@@ -1,7 +1,7 @@
 .title{
-  color: aliceblue;
+  
+  color: black;
   text-transform: capitalize;
-  text-align: center;
   line-height: 60px;
   font-family: ryo-text-plusn, menlo;
   font-weight: 500;
@@ -31,5 +31,6 @@
   }
 }
 body{
-  background-color: black;
+  margin:50px;
+  background-color: white;
 }
