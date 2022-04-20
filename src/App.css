@@ -3,9 +3,6 @@
   color: black;
   text-transform: capitalize;
   line-height: 60px;
-  font-family: ryo-text-plusn, menlo;
-  font-weight: 500;
-  font-style: normal;
 }
 .title-content{
   display: block;
@@ -33,4 +30,9 @@
 body{
   margin:50px;
   background-color: white;
+}
+*{
+  font-family: ryo-text-plusn, menlo;
+  font-weight: 500;
+  font-style: normal;
 }
