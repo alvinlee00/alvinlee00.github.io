@@ -1,0 +1,32 @@
+.title{
+  color: aliceblue;
+  text-transform: capitalize;
+  text-align: center;
+  line-height: 40px;
+  font-family: ryo-text-plusn, menlo;
+  font-weight: 500;
+  font-style: normal;
+}
+.title-content{
+  display: block;
+  opacity: 0;
+  animation: revealText .5s forwards;
+}
+.title-second{
+  animation-delay: .175s;
+}
+.title-third{
+  animation-delay: .25s;
+}
+@keyframes revealText{
+  from{
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: none;
+  }
+}
+body{
+  background-color: black;
+}
