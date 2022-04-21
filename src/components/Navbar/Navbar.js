@@ -13,11 +13,11 @@ class Navbar extends React.Component {
     render(){
         return(
             <nav className = "NavbarItems">
-                <h1 className = "navbar-logo">Alvin Lee</h1>
+                <h2 className = "navbar-logo">Alvin Lee</h2>
                 <div className = "menu-icon" onClick={this.handleClick}>
                     <i className={this.state.clicked ?  'open' : 'closed'}></i>
                 </div>
-                <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+                <ul className = "navbar-collapse nav-menu">
                     {MenuItems.map((item, index) => {
                         return (
                             <li key={index}>
