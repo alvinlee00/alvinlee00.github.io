@@ -10,13 +10,13 @@
   animation: revealText .5s forwards;
 }
 .title-second{
-  animation-delay: .2s;
+  animation-delay: .3s;
 }
 .title-third{
-  animation-delay: .4s;
+  animation-delay: .6s;
 }
 .title-fourth{
-  animation-delay: .6s;
+  animation-delay: .9s;
 }
 @keyframes revealText{
   from{
@@ -28,7 +28,7 @@
   }
 }
 body{
-  margin-left:6%;
+  margin-left:80px;
   margin-top:50px;
   background-color: white;
 }

@@ -60,6 +60,9 @@
     text-align:center;
     width: 75vw;
     justify-content:end;
+    position:absolute;
+    right:50px;
+    align-self:right;
 }
 
 .nav-links{
@@ -89,7 +92,7 @@
     }
     .menu-icon{
         position:absolute;
-        right:30px;
+        right:80px;
         display:inline-block;
         align-self:right;
     }
