@@ -2,7 +2,7 @@
     background: white;
     height:80px;
     display: flex;
-    position: relative;
+    position:relative;
     flex-wrap: wrap;
     justify-content:left;
     align-items:center;
@@ -59,8 +59,8 @@
     list-style: none;
     text-align:center;
     width: 75vw;
-    justify-content:end;
-    position:absolute;
+    justify-content:right;
+    position:relative;
     right:50px;
     align-self:right;
 }

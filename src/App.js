@@ -14,8 +14,13 @@ function App() {
         <span className="title-content title-second">by alvin lee</span>
         <span className="title-content title-third">an aspiring software engineer</span>
         <span className="title-content title-fourth">work in progress</span>
+        <span className="one">.</span>
+        <span className="two">.</span>
+        <span className="three">.</span>
       </span>
+      
     </div>
+    
   );
 }
 
