@@ -61,7 +61,7 @@
     width: 75vw;
     justify-content:right;
     position:relative;
-    right:50px;
+    right:5%;
     align-self:right;
 }
 
@@ -92,7 +92,7 @@
     }
     .menu-icon{
         position:absolute;
-        right:80px;
+        right:5%;
         display:inline-block;
         align-self:right;
     }
