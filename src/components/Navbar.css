@@ -91,6 +91,7 @@
     }
     .menu-icon{
         position:absolute;
+        right:0%;
         display:inline-block;
         align-self:right;
     }
