@@ -20,16 +20,17 @@ root.render(
 
 );
 
-const root2 = ReactDOM.createRoot(document.getElementById('root2'));
-root2.render(
+ReactDOM.render(
     <Router>
-        <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/About" element={<About />}/>
-            <Route path="/Contact" element={<Contact />}/>
-        </Routes>    
-    </Router>
-
-);
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>,
+  
+    document.getElementById("root")
+  );
+  
 
 serviceWorker.unregister();
