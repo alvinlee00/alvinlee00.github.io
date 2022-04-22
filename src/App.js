@@ -1,23 +1,19 @@
 import React from 'react';
-import Navbar from "./components/Navbar/Navbar";
 import './App.css';
-
-
+import Home from "./Home";
+import About from "./About";
+import Contact from "./Contact";
+import  { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     
     <div>
-      <Navbar />
-      <span className="title">
-        <span className="title-content">Portfolio</span>
-        <span className="title-content title-second">by alvin lee</span>
-        <span className="title-content title-third">an aspiring software engineer</span>
-        <span className="title-content title-fourth">work in progress</span>
-        <span className="one">.</span>
-        <span className="two">.</span>
-        <span className="three">.</span>
-      </span>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/About" element={<About />}/>
+        <Route path="/Contact" element={<Contact />}/>
+      </Routes>      
       
     </div>
     

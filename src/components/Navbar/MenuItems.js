@@ -1,13 +1,13 @@
 export const MenuItems = [
     {
         label: 'Home',
-        url: 'Home',
+        url: '/',
         cName: 'nav-links',
         target: '_self',
     },
     {
         label: 'About',
-        url: 'About',
+        url: '/About',
         cName: 'nav-links',
         target: '_self',
     },
@@ -19,7 +19,7 @@ export const MenuItems = [
     },
     {
         label: 'Contact Me',
-        url: '#',
+        url: '/Contact',
         cName: 'nav-links',
         target: '_self',
     },
