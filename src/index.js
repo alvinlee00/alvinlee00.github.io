@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
+import * as serviceWorker from "./serviceWorker";
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 
@@ -31,7 +32,4 @@ root2.render(
 
 );
 
-
-export { default as Home } from "./Home";
-export { default as About } from "./About";
-export { default as Contact } from "./Contact";
+serviceWorker.unregister();
