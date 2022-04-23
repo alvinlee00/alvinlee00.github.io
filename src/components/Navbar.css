@@ -105,7 +105,7 @@
       display: flex;
       background:white;
       flex-direction: column;
-      width: 100%;
+      width: 110%;
       height: 5000px;
       position: absolute;
       top: 73px;
@@ -114,7 +114,7 @@
       transition: all 0.5s ease;
     }
     .nav-menu.active{
-        left:-5%;
+        left:-10%;
         opacity:1;
         transition: all 0.5s ease;
         z-index: 1;
