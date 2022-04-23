@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
+import Resume from './components/Resume';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 
@@ -15,6 +16,7 @@ root.render(
             <Route path="/" element={<Home />}/>
             <Route path="/About" element={<About />}/>
             <Route path="/Contact" element={<Contact />}/>
+            <Route path="/Resume" element={<Resume />}/>
         </Routes>    
     </Router>
 

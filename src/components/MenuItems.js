@@ -13,7 +13,7 @@ export const MenuItems = [
     },
     {
         label: 'Resume',
-        url: 'Resume_Final.pdf',
+        url: '/Resume',
         cName: 'nav-links',
         target: '_blank',
     },
