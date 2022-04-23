@@ -67,10 +67,10 @@
 
 
 .nav-links{
-    color:black;
-    display:inline-block;
     text-decoration:none !important;
     color:inherit !important;
+    color:black;
+    display:inline-block;
     padding: .5rem 1rem;
     position: relative;
 }

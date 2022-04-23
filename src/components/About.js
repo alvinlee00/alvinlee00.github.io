@@ -9,7 +9,7 @@ function About(){
 			<Navbar />
 			<span className="title">
 				<span className="title-content">
-					I am currently an undergraduate student studying computer science and mathematics at New York University.
+					I am currently an undergraduate student studying Computer Science and Mathematics at New York University.
 					I have a lot of experience in Python and I am familiar with Java as well as Julia. I hope to leverage my background 
 					in mathematics and computer science to make meaningful contributions to the world.
 				</span>
