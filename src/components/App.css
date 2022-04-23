@@ -1,3 +1,4 @@
+/*Texts floating in animation*/
 .title{
   position:relative;
   top:20px;
@@ -43,7 +44,7 @@ body{
   font-style: normal;
 }
 
-/*animation*/
+/*animation for the ...*/
 
 .one {
   opacity: 0;
@@ -69,6 +70,7 @@ body{
    animation-delay: 0.3s;
 }
 
+
 @-webkit-keyframes dot {
     0% { opacity: 0; }
    50% { opacity: 0; }
@@ -80,8 +82,9 @@ body{
    50% { opacity: 0; }
   100% { opacity: 1; }
 }
-
+/*for RESUME*/
 .react-pdf__Page__canvas {
+  box-shadow: 5px 5px 5px 5px gray;
   margin: 0 auto;
   width:60% !important;
   height: 100% !important;
@@ -99,4 +102,7 @@ body{
     width: 100% !important;
     height: 100% !important;
   }
+}
+.makeTall{
+  height:50px;
 }

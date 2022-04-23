@@ -9,6 +9,7 @@ function Resume(){
       <Document file={"Resume_Final.pdf"} onLoadError={console.error}>
         <Page pageNumber={1}/>
       </Document>
+      <div className = 'makeTall'></div>
     </div>
 	)
 }
