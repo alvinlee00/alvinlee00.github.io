@@ -18,7 +18,7 @@ class Navbar extends React.Component {
                 <div className = "menu-icon" onClick={this.handleClick}>
                     <i className={this.state.clicked ?  'open' : 'closed'}></i>
                 </div>
-                <ul className = "navbar-collapse nav-menu">
+                <ul className={this.state.clicked ? 'nav-menu active navbar-collapse' : 'nav-menu navbar-collapse'}>
                     {MenuItems.map((item, index) => {
                         return (
                             <li key={index}>
