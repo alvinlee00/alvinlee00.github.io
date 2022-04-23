@@ -107,10 +107,10 @@
       background:white;
       flex-direction: column;
       width: 110%;
-      height: 5000px;
+      height: 100vh;
       position: absolute;
       top: 73px;
-      left: -100%;
+      left: -120%;
       opacity: 1;
       transition: all 0.5s ease;
     }

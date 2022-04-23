@@ -1,14 +1,15 @@
 import React from 'react'
 import Navbar from "./Navbar";
 import './App.css';
-
-
+import { Document,Page } from 'react-pdf/dist/esm/entry.webpack'
 function Resume(){
 	return(
 		<div>
 		  <Navbar />
-      <embed src="Resume_Final.pdf" type = "application/pdf" width="100%" height="1200px"></embed>
-		</div>
+      <Document file={"Resume_Final.pdf"} onLoadError={console.error}>
+        <Page pageNumber={1}/>
+      </Document>
+    </div>
 	)
 }
 

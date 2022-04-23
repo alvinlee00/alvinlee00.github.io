@@ -81,5 +81,16 @@ body{
   100% { opacity: 1; }
 }
 
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+  width: 80% !important;
+  height: 100% !important;
+}
 
-
+@media screen and (max-width: 750px) {
+  .react-pdf__Page__canvas {
+    margin: 0 auto;
+    width: 90% !important;
+    height: 100% !important;
+  }
+}
