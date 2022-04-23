@@ -59,6 +59,7 @@
     list-style: none;
     text-align:center;
     width: 75vw;
+    right: -25px;
     justify-content:right;
     position:relative;
     align-self:right;
