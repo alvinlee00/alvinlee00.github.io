@@ -7,7 +7,7 @@ function Resume(){
 	return(
 		<div>
 		  <Navbar />
-      <embed src="Resume_Final.pdf" width="100%" height="1200"></embed>
+      <embed src="Resume_Final.pdf" type = "application/pdf" width="100%" height="1200px"></embed>
 		</div>
 	)
 }
