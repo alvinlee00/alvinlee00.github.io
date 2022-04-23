@@ -6,8 +6,8 @@ import './App.css';
 function Resume(){
 	return(
 		<div>
-			<Navbar />
-			<embed src="Resume_Final.pdf" width="100%" height="1200"></embed>
+		  <Navbar />
+      <embed src="Resume_Final.pdf" width="100%" height="1200"></embed>
 		</div>
 	)
 }
