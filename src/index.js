@@ -19,7 +19,6 @@ root.render(
             <Route path="/Resume" element={<Resume />}/>
         </Routes>    
     </Router>
-
 );
 
 

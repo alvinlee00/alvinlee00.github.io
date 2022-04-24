@@ -13,8 +13,9 @@
     margin-inline-end: 0px;
 }
 .blue-bar{
-    width: 100vh, important !important;;
+    width: 100%, important !important;;
     background-color: aliceblue;
+    padding-top:10px;
     padding-right:6%;
     padding-left:6%;
     border-radius:0;
@@ -142,7 +143,7 @@
     }
     .menu-icon{
         position:absolute;
-        right:0%;
+        right:6%;
         display:inline-block;
         align-self:right;
     }
