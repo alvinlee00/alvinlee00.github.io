@@ -9,10 +9,11 @@ function Home() {
       <Navbar />
       
       <div className="title">
-        <span className="title-content">Portfolio</span>
-        <span className="title-content title-second">By Alvin Lee</span>
-        <span className="title-content title-third">An Aspiring Software Engineer</span>
-        <span className="title-content title-fourth">Work In Progress</span>
+        <h1 className="title-content bold">Welcome!</h1>
+        <br></br>
+        <span className="title-content title-third">My name is Alvin Lee</span>
+        <span className="title-content title-fourth">Computer Science Enthusiast</span>
+        <span className="title-content title-fifth">Work In Progress</span>
         <span className="one">.</span>
         <span className="two">.</span>
         <span className="three">.</span>

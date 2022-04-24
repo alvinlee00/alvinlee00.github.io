@@ -1,33 +1,68 @@
 /*Texts floating in animation*/
 .title{
   position:relative;
-  top:20px;
+  top:50px;
   padding-bottom:50px;
   color: black;
-  line-height: 40px;
-  margin-left:6%;
-  margin-right:6%;
+  line-height: 30px;
+  margin-left:15%;
+  margin-right:15%;
+}
+.space{
+  padding-top:30px
+}
+.container{
+  width:100%;
+  padding-right:15px;
+  padding-left:15px;
+}
+.row{
+  display: flex !important;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin-right:0px;
+  margin-left:0px;
+}
+.col{
+  margin-right:0% !important;
+  margin-left:5% !important;
+  position: relative;
+  flex-basis:0 ;
+  flex-grow:1 ;
+  max-width:100%;
+}
+.col2{
+  top:60px;
+  margin-right:5% !important;
+  margin-left:0% !important;
+  position: relative;
+  flex-basis:0 ;
+  flex-grow:1 ;
+  max-width:30%;
+}
+.bold{
+  font-weight: bold;
 }
 .title-content{
   display: block;
   opacity: 0;
-  animation: revealText .5s forwards;
+  animation: revealText 1s forwards;
 }
 .title-second{
-  animation-delay: .3s;
+  animation-delay: .1s;
 }
 .title-third{
-  animation-delay: .6s;
+  animation-delay: .2s;
 }
 .title-fourth{
-  animation-delay: .9s;
+  animation-delay: .3s;
 }
 .title-fifth{
-  animation-delay:1.2s;
+  animation-delay: .4s;
 }
 @keyframes revealText{
   from{
-    transform: translateY(20px);
+    transform: translateY(100px);
   }
   to{
     opacity: 1;
@@ -95,6 +130,22 @@ body{
     width: 80% !important;
     height: 100% !important;
   }
+  .title{
+    font-size:.7em;
+    line-height: 25px;
+  }
+  h1{
+    font-size:2em;
+  }
+  .col2{
+    top:60px;
+    margin-right:5% !important;
+    margin-left:0% !important;
+    position: relative;
+    flex-basis:0 ;
+    flex-grow:1 ;
+    max-width:40%;
+  }
 }
 @media screen and (max-width: 800px) {
   .react-pdf__Page__canvas {
@@ -102,10 +153,37 @@ body{
     width: 100% !important;
     height: 100% !important;
   }
-}
-@media screen and (max-width: 800px) {
   .makeTall{
     height:0px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .title{
+    top:10px;
+    font-size:.5em;
+    line-height: 20px;
+    margin-left:8%;
+    margin-right:8%;
+  }
+  .container{
+    width:100%;
+    padding-right:0%;
+    padding-left:0%;
+  }
+  h1{
+    font-size:1.5em;
+  }
+  .col2{
+    top:60px;
+    margin-right:5% !important;
+    margin-left:0% !important;
+    position: relative;
+    flex-basis:0 ;
+    flex-grow:1 ;
+    max-width:40%;
+  }
+  .space{
+    padding-top:10px;
   }
 }
 .makeTall{
