@@ -8,7 +8,7 @@ function Home() {
     <div>
       <Navbar />
       
-      <span className="title">
+      <div className="title">
         <span className="title-content">Portfolio</span>
         <span className="title-content title-second">By Alvin Lee</span>
         <span className="title-content title-third">An Aspiring Software Engineer</span>
@@ -16,7 +16,7 @@ function Home() {
         <span className="one">.</span>
         <span className="two">.</span>
         <span className="three">.</span>
-      </span>
+      </div>
       
     </div>
     

@@ -7,6 +7,17 @@
     justify-content:left;
     align-items:center;
     font-size: 1rem;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.blue-bar{
+    width: 100vh, important !important;;
+    background-color: aliceblue;
+    padding-right:6%;
+    padding-left:6%;
+    border-radius:0;
 }
 
 .navbar-logo{
@@ -84,13 +95,15 @@
     position:absolute;
     left:15%;
     bottom:2px;
-    transform:scaleX(0);
-    transform-origin:left;
-    transition: transform .25s ease;
+    transform:scale3d(0,1,1);
+    transform-origin:100% 50%;
+    transition: transform .5s ease;
 }
 .nav-links:hover::after{
-    transform: scaleX(1);
+    transform-origin:0% 50%;
+    transform: scale3d(1,1,1);
 }
+
 .menu-icon{
     display:none;
 }
@@ -106,38 +119,26 @@
       display: flex;
       background:white;
       flex-direction: column;
-      width: 120%;
+      width: 130%;
       height: 130vh !important;
       position: absolute;
       top: 73px;
       left: -120%;
       opacity: 1;
-      transition: all 0.5s ease;
+      transition: all .75s ease;
     }
     .nav-menu.active{
-        left:-15%;
+        background-color: aliceblue;
+        left:-20%;
         opacity:1;
-        transition: all 0.5s ease;
+        transition: all .75s ease;
         z-index: 1;
     }
     .nav-links{
         text-align: center;
-        padding: 2rem;
+        padding: 1rem;
         width: 100%;
         display: table;
-    }
-    .nav-links::after{
-        content: '';
-        width: 70%;
-        height: 1px;
-        background-color: black;
-        border-radius: 3px;
-        position:absolute;
-        left:15%;
-        bottom:2px;
-        transform:scaleX(0);
-        transform-origin:left;
-        transition: transform .25s ease;
     }
     .menu-icon{
         position:absolute;
@@ -152,4 +153,17 @@
         cursor:pointer;
     }
   }
-
+  @media screen and (max-width: 550px) {
+    .nav-menu{
+        display: flex;
+        background:white;
+        flex-direction: column;
+        width: 120%;
+        height: 100vh !important;
+        position: absolute;
+        top: 73px;
+        left: -120%;
+        opacity: 1;
+        transition: all 0.5s ease;
+      }
+  }

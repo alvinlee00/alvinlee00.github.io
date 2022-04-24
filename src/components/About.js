@@ -7,7 +7,7 @@ function About(){
 	return(
 		<div>
 			<Navbar />
-			<span className="title">
+			<div className="title">
 				<span className="title-content">
 					I am currently an undergraduate student studying Computer Science and Mathematics at New York University.
 					I have a lot of experience in Python and I am familiar with Java as well as Julia. I hope to leverage my background 
@@ -22,7 +22,7 @@ function About(){
 				<span className="title-content title-third">
 					For some more information about me, check out my resume and feel free to contact me!
 				</span>
-			</span>
+			</div>
 		</div>
 	)
 }

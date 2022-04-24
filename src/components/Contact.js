@@ -6,7 +6,7 @@ function Contact(){
 	return(
 		<div>
 			<Navbar />
-			<span className="title">
+			<div className="title">
 				<span className="title-content">
 					Email: alvinlee225@gmail.com
 				</span>
@@ -14,7 +14,7 @@ function Contact(){
 				<span className="title-content title-second">
 					Alternative Email: al6178@nyu.edu
 				</span>
-			</span>
+			</div>
     </div>
 	)
 }

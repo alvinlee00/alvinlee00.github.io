@@ -5,6 +5,8 @@
   padding-bottom:50px;
   color: black;
   line-height: 40px;
+  margin-left:6%;
+  margin-right:6%;
 }
 .title-content{
   display: block;
@@ -33,8 +35,6 @@
   }
 }
 body{
-  margin-left:6%;
-  margin-right:6%;
   margin-top:50px;
   background-color: white;
 }
@@ -101,6 +101,11 @@ body{
     margin: 0 auto;
     width: 100% !important;
     height: 100% !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .makeTall{
+    height:0px;
   }
 }
 .makeTall{
