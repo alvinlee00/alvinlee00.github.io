@@ -1,3 +1,6 @@
+*{
+    margin-top:0 !important;
+}
 .NavbarItems{
     color:white;
     height:80px;
