@@ -18,7 +18,7 @@
 .blue-bar{
     width: 100%, important !important;;
     background-color: rgb(15,76,129);
-    padding-top:10px;
+    padding-top:20px;
     padding-right:6%;
     padding-left:6%;
     border-radius:0;
@@ -117,7 +117,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
     .nav-menu{
       display: flex;
       background:white;
@@ -146,6 +146,7 @@
     }
     .menu-icon{
         position:absolute;
+        top:50%;
         right:6%;
         display:inline-block;
         align-self:right;

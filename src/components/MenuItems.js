@@ -18,6 +18,12 @@ export const MenuItems = [
         target: '_blank',
     },
     {
+        label: 'Projects',
+        url: '/Projects',
+        cName: 'nav-links',
+        target: '_self',
+    },
+    {
         label: 'Contact Me',
         url: '/Contact',
         cName: 'nav-links',
