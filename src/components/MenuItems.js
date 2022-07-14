@@ -1,31 +1,31 @@
 export const MenuItems = [
     {
         label: 'Home',
-        url: '/',
+        url: '/website1',
         cName: 'nav-links',
         target: '_self',
     },
     {
         label: 'About',
-        url: '/About',
+        url: '/website1/About',
         cName: 'nav-links',
         target: '_self',
     },
     {
         label: 'Resume',
-        url: '/Resume',
+        url: '/website1/Resume',
         cName: 'nav-links',
         target: '_blank',
     },
     {
         label: 'Projects',
-        url: '/Projects',
+        url: '/website1/Projects',
         cName: 'nav-links',
         target: '_self',
     },
     {
         label: 'Contact Me',
-        url: '/Contact',
+        url: '/website1/Contact',
         cName: 'nav-links',
         target: '_self',
     },
