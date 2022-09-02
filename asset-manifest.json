@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/leealvin.dev/static/css/main.c4d66b8d.css",
-    "main.js": "/leealvin.dev/static/js/main.0a53daf8.js",
-    "pdf.worker.js": "/leealvin.dev/e7e915313973ba1d49f9bb2a1998626e.js",
-    "index.html": "/leealvin.dev/index.html",
-    "main.c4d66b8d.css.map": "/leealvin.dev/static/css/main.c4d66b8d.css.map",
-    "main.0a53daf8.js.map": "/leealvin.dev/static/js/main.0a53daf8.js.map"
+    "main.css": "/static/css/main.c4d66b8d.css",
+    "main.js": "/static/js/main.deb86260.js",
+    "pdf.worker.js": "/e7e915313973ba1d49f9bb2a1998626e.js",
+    "index.html": "/index.html",
+    "main.c4d66b8d.css.map": "/static/css/main.c4d66b8d.css.map",
+    "main.deb86260.js.map": "/static/js/main.deb86260.js.map"
   },
   "entrypoints": [
     "static/css/main.c4d66b8d.css",
-    "static/js/main.0a53daf8.js"
+    "static/js/main.deb86260.js"
   ]
 }
