@@ -40,7 +40,7 @@
 .menu-icon{
     width:25px;
     height:3px;
-    background: white;
+    background: black;
     border-radius: 5px;
     transition: all .5s ease-in-out;
     
@@ -51,7 +51,7 @@
     position: absolute;
     width:25px;
     height:3px;
-    background: white;
+    background: black;
     border-radius: 5px;
     transition: all .5s ease-in-out;
 }
@@ -132,7 +132,7 @@
       transition: all .75s ease;
     }
     .nav-menu.active{
-        background-color: rgb(15,76,129);
+        background-color: white;
         top:100%;
         left:-20%;
         opacity:1;
