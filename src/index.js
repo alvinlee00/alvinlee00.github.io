@@ -6,6 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Resume from './components/Resume';
 import Projects from './components/Projects';
+import Blogs from './Blogs/Blogs';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 
@@ -18,6 +19,7 @@ root.render(
             <Route path="/Contact" element={<Contact />}/>
             <Route path="/Resume" element={<Resume />}/>
             <Route path="/Projects" element={<Projects />}/>
+            <Route path="/Blogs" element={<Blogs />}/>
         </Routes>    
     </Router>
 );
