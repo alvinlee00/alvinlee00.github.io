@@ -121,7 +121,7 @@
 @media screen and (max-width: 800px) {
     .nav-menu{
       display: flex;
-      background:white;
+      background:rgba(0,0,0,0);
       flex-direction: column;
       width: 130%;
       height: 130vh !important;

@@ -1,0 +1,10 @@
+.latex-body{
+  position:relative;
+  top:50px;
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.heading {
+  padding-bottom: 24px;
+}
