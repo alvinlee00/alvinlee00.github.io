@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from "../components/Navbar";
-import './App.css';
+import '/Users/alvinlee/Desktop/Github/website1/src/components/App.css';
+import './Blogs.css'
+
 var Latex = require("react-latex")
 
 function Blogs(){
@@ -8,10 +10,10 @@ function Blogs(){
 	return(
 		<div>
 			<Navbar />
-      test
-      <Latex>
-        {fraction}
-      </Latex>
+      <div className='latex-body'>
+        <h5>Non-Linear Regression and Gradient Descent</h5>
+        
+      </div>
 		</div>
 	)
 }
