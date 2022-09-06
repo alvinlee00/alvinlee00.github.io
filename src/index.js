@@ -6,7 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Resume from './components/Resume';
 import Projects from './components/Projects';
-import Blogs from './Blogs/MLBlogs';
+import MLBlogs from './Blogs/MLBlogs';
 import NLRegAndGD from './Blogs/MLBlogs/NLRegAndGD';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
@@ -21,8 +21,8 @@ root.render(
             <Route path="/Resume" element={<Resume />}/>
             <Route path="/Projects" element={<Projects />}/>
             
-            <Route path="/Blogs" element={<Blogs />}/>
-                <Route path="/Blogs/non-linear-regression-and-gradient-descent" element={<NLRegAndGD/>}/>
+            <Route path="/MLBlogs" element={<MLBlogs />}/>
+                <Route path="/MLBlogs/non-linear-regression-and-gradient-descent" element={<NLRegAndGD/>}/>
                 
 
         </Routes>    
