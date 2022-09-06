@@ -26,11 +26,10 @@
 }
 
 .navbar-logo{ 
-    cursor: pointer;
     display: inline-block;
     align-items:left;
     padding-top: 0.3125rem;
-    padding-bottom: 0.3125rem;
+    padding-bottom: 3.8rem;
     margin-right: 1rem;
     font-size: 1.25rem;
     line-height: inherit;

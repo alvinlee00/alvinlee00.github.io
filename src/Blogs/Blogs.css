@@ -8,3 +8,16 @@
 .heading {
   padding-bottom: 24px;
 }
+
+.blog-list{
+  list-style: none;
+}
+.h7{
+  font-size:14px;
+}
+li{
+  padding-bottom:50px;
+}
+h6{
+  padding-top:5px;
+}
