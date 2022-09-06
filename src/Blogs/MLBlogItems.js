@@ -1,7 +1,7 @@
 export const MLBlogItems = [
 {
     label: 'Linear Algebra Review',
-    url: '/Blogs/lin-alg-review',
+    url: '/MLBlogs/lin-alg-review',
     cName: 'blog-links',
     date: '06 September 2022',
     description: '',
@@ -9,7 +9,7 @@ export const MLBlogItems = [
 },
 {
     label: 'Philosophical and Cognitive underpinnings of ML',
-    url: '/Blogs/phil-and-cog-underpinnings-ml',
+    url: '/MLBlogs/phil-and-cog-underpinnings-ml',
     cName: 'blog-links',
     date: '08 September 2022',
     description: '',
@@ -17,7 +17,7 @@ export const MLBlogItems = [
 },
 {
     label: 'Linear Regression and Regularization (Part 1)',
-    url: '/Blogs/lin-regression-and-regular-pt1',
+    url: '/MLBlogs/lin-regression-and-regular-pt1',
     cName: 'blog-links',
     date: '13 September 2022',
     description: '',
@@ -25,7 +25,7 @@ export const MLBlogItems = [
 },
 {
     label: 'Linear Regression and Regularization (Part 2)',
-    url: '/Blogs/lin-regression-and-regular-pt2',
+    url: '/MLBlogs/lin-regression-and-regular-pt2',
     cName: 'blog-links',
     date: '15 September 2022',
     description: '',
@@ -33,7 +33,7 @@ export const MLBlogItems = [
 },
 {
     label: 'Non Linear Regression and Gradient Descent',
-    url: '/Blogs/non-linear-regression-and-gradient-descent',
+    url: '/MLBlogs/non-linear-regression-and-gradient-descent',
     cName: 'blog-links',
     date: '13 October 2022',
     description: 'This is the section I will cover for credit',
