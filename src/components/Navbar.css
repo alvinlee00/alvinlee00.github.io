@@ -84,7 +84,7 @@
 .nav-links{
     text-decoration:none !important;
     color:inherit !important;
-    color:white;
+    color:black;
     display:inline-block;
     padding: .5rem 1rem;
     position: relative;
@@ -93,7 +93,7 @@
     content: '';
     width: 70%;
     height: 1px;
-    background-color: white;
+    background-color: black;
     border-radius: 3px;
     position:absolute;
     left:15%;
