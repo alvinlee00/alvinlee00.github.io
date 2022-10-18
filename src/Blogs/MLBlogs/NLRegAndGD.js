@@ -1,16 +1,10 @@
 import React from 'react'
 import Navbar from "/Users/alvinlee/Desktop/Github/website1/src/components/Navbar.js";
 import '/Users/alvinlee/Desktop/Github/website1/src/components/App.css';
-import MathJax from 'react-mathjax'
+
 import './MLBlogs.css'
 
-const tex = `
-\\begin{array}{}
-a & b & c \\\\
-d & e & f & g \\\\
-& h & i & \\theta
-\\end{array}
-`
+
 
 function NLRegAndGD(){
 
@@ -20,12 +14,10 @@ function NLRegAndGD(){
       <div className='latex-body'>
         <h5>Non-Linear Regression and Gradient Descent</h5>
 				<hr/>
-        <MathJax.Provider>
-					<div>
-						Consider the following formula:
-						<MathJax.Node formula={tex}/>
-					</div>
-				</MathJax.Provider>
+				<iframe className = 'notion'
+  				src="https://r4km70rx1rgro3.embednotionpage.com/Introduction-to-Gradients-fa987108648f48769903263c89ca645d"
+  
+></iframe>  
       </div>
 		</div>
 	)
