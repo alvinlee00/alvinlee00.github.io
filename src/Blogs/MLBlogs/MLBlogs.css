@@ -4,3 +4,10 @@
   margin-left:15%;
   margin-right:15%;
 }
+
+.notion { 
+  width: 100%; 
+  height: 1000px; 
+  border: 0px solid #ccc; 
+  padding: none; 
+} 
