@@ -15,7 +15,7 @@ function NLRegAndGD(){
         <h5>Non-Linear Regression and Gradient Descent</h5>
 				<hr/>
 				<iframe className = 'notion'
-  				src="https://r4km70rx1rgro3.embednotionpage.com/Introduction-to-Gradients-fa987108648f48769903263c89ca645d"
+  				src="https://leealvin.dev/notion_notes/"
   
 ></iframe>  
       </div>
