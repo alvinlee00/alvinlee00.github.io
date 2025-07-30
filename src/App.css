@@ -270,7 +270,7 @@ body {
 }
 
 .project-item:nth-child(4) {
-  grid-column: 5 / 11;
+  grid-column: 4 / 10;
   margin-top: 3rem;
 }
 
