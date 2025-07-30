@@ -7,13 +7,13 @@ function Contact({ scrollY }) {
   const contactLinks = [
     {
       platform: "Email",
-      handle: "alvin.lee@example.com",
-      url: "mailto:alvin.lee@example.com"
+      handle: "alvinlee225@gmail.com",
+      url: "mailto:alvinlee225@gmail.com"
     },
     {
       platform: "LinkedIn",
-      handle: "alvinlee00",
-      url: "https://linkedin.com/in/alvinlee00"
+      handle: "Alvin Lee",
+      url: "https://www.linkedin.com/in/alvin-lee-2201081ab"
     },
     {
       platform: "GitHub",
