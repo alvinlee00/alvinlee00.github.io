@@ -1,0 +1,7 @@
+# This folder contains archived content from the previous portfolio version
+# These files are preserved for reference only and are not part of the build process
+*
+!.gitignore
+!components/
+!styles/
+!blogs/
