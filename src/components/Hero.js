@@ -22,11 +22,10 @@ function Hero({ scrollY }) {
         
         <div className="hero-description">
           <p className="hero-role">
-            Software Engineer & Creative Developer
+            Software Engineer
           </p>
           <p className="hero-subtitle">
-            Crafting digital experiences through clean code and thoughtful design.
-            Currently studying Computer Science and Mathematics at NYU.
+            Code enthusiast passionate about building meaningful software solutions.
           </p>
         </div>
       </div>

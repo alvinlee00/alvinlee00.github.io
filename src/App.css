@@ -8,6 +8,15 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Custom smooth scroll with slower duration */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -181,6 +190,7 @@ body {
 .projects-section {
   padding: 10rem 3rem;
   background-color: #ffffff;
+  position: relative;
 }
 
 .projects-container {
@@ -189,7 +199,11 @@ body {
 }
 
 .projects-header {
+  text-align: center;
   margin-bottom: 8rem;
+  position: sticky;
+  top: 20vh;
+  z-index: 1;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease;
@@ -202,37 +216,31 @@ body {
 
 .projects-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(5rem, 12vw, 10rem);
+  font-size: clamp(4rem, 8vw, 6rem);
   font-weight: 400;
-  color: #1a1a1a;
+  color: rgba(26, 26, 26, 0.9);
   line-height: 0.8;
   letter-spacing: -0.02em;
-  position: relative;
-}
-
-.projects-title::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem;
-  left: 0;
-  width: 60px;
-  height: 1px;
-  background-color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 /* Asymmetric Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 2rem;
+  gap: 3rem;
   position: relative;
+  row-gap: 6rem;
 }
 
 .project-item {
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(30px);
+  transition: all 0.6s ease;
   cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
 
 .project-item.visible {
@@ -241,7 +249,8 @@ body {
 }
 
 .project-item:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-4px) scale(1.01);
+  transition: all 0.3s ease;
 }
 
 /* Asymmetric positioning */
@@ -252,22 +261,22 @@ body {
 
 .project-item:nth-child(2) {
   grid-column: 7 / 13;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .project-item:nth-child(3) {
   grid-column: 1 / 6;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .project-item:nth-child(4) {
   grid-column: 5 / 11;
-  margin-top: 6rem;
+  margin-top: 3rem;
 }
 
 .project-item:nth-child(5) {
   grid-column: 8 / 13;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .project-image {

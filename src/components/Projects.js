@@ -59,7 +59,7 @@ function Projects({ scrollY }) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -81,10 +81,6 @@ function Projects({ scrollY }) {
             <div 
               key={project.id}
               className={`project-item ${project.size} ${isVisible ? 'visible' : ''}`}
-              style={{ 
-                transitionDelay: `${index * 0.1}s`,
-                transform: `translateY(${scrollY * 0.05 * (index % 2 === 0 ? 1 : -1)}px)`
-              }}
             >
               <div className="project-image">
                 <div className="project-placeholder">
