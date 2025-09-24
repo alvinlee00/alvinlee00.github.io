@@ -7,48 +7,24 @@ function Projects({ scrollY }) {
   const projects = [
     {
       id: 1,
-      title: "Portfolio Website",
-      description: "A minimalist React portfolio featuring smooth animations, gradient backgrounds, and responsive design. Built with modern web technologies and deployed on GitHub Pages.",
-      tech: "React, CSS Animations, GitHub Pages",
-      year: "2024",
-      category: "Web Development",
-      size: "large"
+      title: "Snowflake MCP Server",
+      description: "Model Context Protocol server that turns Snowflake ACCOUNT_USAGE data into natural-language insights. Includes AI-assisted query builder, schema exploration, security anomaly detection, and performance/cost optimization tooling surfaced directly inside Claude.",
+      tech: "Python, Snowflake, MCP Protocol",
+      year: "2025",
+      category: "Data Infrastructure",
+      size: "large",
+      image: "syncify/placeholder_project_snowflake_mcp.png",
+      imageClass: "project-image--contain"
     },
     {
       id: 2,
-      title: "Machine Learning Platform",
-      description: "Interactive platform for exploring ML algorithms with real-time visualizations and educational content. Features dynamic data processing and algorithm comparisons.",
-      tech: "Python, JavaScript, D3.js, Flask",
-      year: "2023", 
-      category: "Machine Learning",
-      size: "medium"
-    },
-    {
-      id: 3,
-      title: "E-Commerce Application",
-      description: "Full-stack e-commerce solution with inventory management, payment processing, and user authentication. Scalable architecture with modern frameworks.",
-      tech: "React, Node.js, MongoDB, Stripe API",
-      year: "2023",
-      category: "Full Stack",
-      size: "small"
-    },
-    {
-      id: 4,
-      title: "Data Visualization Dashboard",
-      description: "Real-time analytics dashboard for business intelligence with interactive charts, filtering capabilities, and export functionality.",
-      tech: "Vue.js, Chart.js, Firebase, REST APIs",
-      year: "2024",
-      category: "Data Visualization", 
-      size: "medium"
-    },
-    {
-      id: 5,
-      title: "Mobile Productivity App",
-      description: "Cross-platform mobile application for task management and productivity tracking with offline functionality and cloud sync.",
-      tech: "React Native, SQLite, Firebase, Redux",
-      year: "2023",
-      category: "Mobile Development",
-      size: "large"
+      title: "Syncify",
+      description: "Universal playlist synchronization service enabling seamless transfer between Spotify and Apple Music. Features ISRC-based matching with fuzzy fallback algorithms, achieving 97% track matching accuracy. Real-time progress tracking with detailed sync reports and OAuth authentication for secure API access.",
+      tech: "FastAPI, Python, JavaScript, Spotify API, Apple Music API, OAuth 2.0",
+      year: "2025",
+      category: "Web Application",
+      size: "large",
+      image: "syncify/placeholder_project_syncify.png"
     }
   ];
 
@@ -82,10 +58,8 @@ function Projects({ scrollY }) {
               key={project.id}
               className={`project-item ${project.size} ${isVisible ? 'visible' : ''}`}
             >
-              <div className="project-image">
-                <div className="project-placeholder">
-                  <span className="project-category">{project.category}</span>
-                </div>
+              <div className={`project-image ${project.imageClass ? project.imageClass : ''}`}>
+                <img src={project.image} alt={project.title} />
               </div>
               
               <div className="project-content">
