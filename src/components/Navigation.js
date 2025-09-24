@@ -14,6 +14,21 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
 
   const isHome = currentRoute === 'home';
 
+  const detailNavigation = {
+    syncify: {
+      label: '← BACK TO PROJECTS',
+      target: 'projects'
+    },
+    snowflake: {
+      label: '← BACK TO PROJECTS',
+      target: 'projects'
+    },
+    pepsico: {
+      label: '← BACK TO EXPERIENCE',
+      target: 'experience'
+    }
+  };
+
   const scrollToSection = (sectionId) => {
     if (!sectionId) {
       return;
@@ -54,6 +69,9 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
         
         {isHome ? (
           <div className="nav-menu">
+            <button onClick={() => scrollToSection('experience')}>
+              EXPERIENCE
+            </button>
             <button onClick={() => scrollToSection('projects')}>
               PROJECTS
             </button>
@@ -66,8 +84,15 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
           </div>
         ) : (
           <div className="nav-menu nav-menu--detail">
-            <button onClick={() => onNavigate && onNavigate('home', { scrollTarget: 'projects' })}>
-              ← BACK TO PROJECTS
+            <button
+              onClick={() => {
+                const config = detailNavigation[currentRoute] || detailNavigation.syncify;
+                if (onNavigate) {
+                  onNavigate('home', { scrollTarget: config.target });
+                }
+              }}
+            >
+              {(detailNavigation[currentRoute] || detailNavigation.syncify).label}
             </button>
           </div>
         )}

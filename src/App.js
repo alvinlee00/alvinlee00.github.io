@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Photography from './components/Photography';
 import Contact from './components/Contact';
 import SyncifyProject from './components/SyncifyProject';
 import SnowflakeProject from './components/SnowflakeProject';
+import PepsicoExperience from './components/PepsicoExperience';
 
 const ROUTES = {
   HOME: 'home',
   SYNCIFY: 'syncify',
-  SNOWFLAKE: 'snowflake'
+  SNOWFLAKE: 'snowflake',
+  PEPSICO: 'pepsico'
 };
 
 const buildPath = (route) => {
@@ -20,6 +23,9 @@ const buildPath = (route) => {
   }
   if (route === ROUTES.SNOWFLAKE) {
     return '/projects/snowflake-mcp';
+  }
+  if (route === ROUTES.PEPSICO) {
+    return '/experience/pepsico';
   }
   return '/';
 };
@@ -31,6 +37,9 @@ const getRouteFromPath = () => {
   }
   if (path.startsWith('/projects/snowflake-mcp')) {
     return ROUTES.SNOWFLAKE;
+  }
+  if (path.startsWith('/experience/pepsico')) {
+    return ROUTES.PEPSICO;
   }
   return ROUTES.HOME;
 };
@@ -157,6 +166,18 @@ function App() {
         {isHome ? (
           <>
             <Hero scrollY={scrollY} />
+            <Experience 
+              scrollY={scrollY}
+              onExperienceSelect={(slug) => {
+                const routeMap = {
+                  'pepsico-data-platform': ROUTES.PEPSICO
+                };
+                const targetRoute = routeMap[slug];
+                if (targetRoute) {
+                  navigateTo(targetRoute);
+                }
+              }}
+            />
             <Projects scrollY={scrollY} onProjectSelect={(slug) => {
               const routeMap = {
                 syncify: ROUTES.SYNCIFY,
@@ -178,6 +199,10 @@ function App() {
 
         {currentRoute === ROUTES.SNOWFLAKE ? (
           <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'projects' })} />
+        ) : null}
+
+        {currentRoute === ROUTES.PEPSICO ? (
+          <PepsicoExperience onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'experience' })} />
         ) : null}
       </main>
     </div>

@@ -186,6 +186,127 @@ body {
   letter-spacing: 0.01em;
 }
 
+/* Experience Section */
+
+.experience-section {
+  padding: 9rem 3rem 5rem;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.experience-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.experience-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.experience-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 400;
+  color: rgba(26, 26, 26, 0.9);
+  letter-spacing: -0.02em;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3rem;
+  row-gap: 4rem;
+  position: relative;
+}
+
+.experience-card {
+  grid-column: 2 / span 10;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  box-shadow: 0 18px 55px -30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.45s ease;
+}
+
+.experience-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 65px -35px rgba(0, 0, 0, 0.3);
+}
+
+.experience-card__meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.experience-card__role {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.experience-card__company {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #808080;
+  margin: 0;
+}
+
+.experience-card__description {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #555;
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0;
+}
+
+.experience-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.experience-card__cta span:last-child {
+  font-size: 1.2rem;
+}
+
 /* Projects Section */
 .projects-section {
   padding: 10rem 3rem;
@@ -462,6 +583,11 @@ body {
   padding: 2.5rem;
 }
 
+.experience-detail__hero-image {
+  background: linear-gradient(135deg, rgba(34, 61, 114, 0.08) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border: 1px solid rgba(34, 61, 114, 0.08);
+}
+
 .project-detail__hero-image--compact {
   max-width: 780px;
   margin: 0 auto;
@@ -477,6 +603,31 @@ body {
   width: 100%;
   display: block;
   object-fit: contain;
+}
+
+.experience-detail__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.experience-detail__gallery-item {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 35px 65px -45px rgba(15, 43, 89, 0.35);
+  border: 1px solid rgba(15, 43, 89, 0.08);
+}
+
+.experience-detail__gallery-item img {
+  border-radius: 12px;
+}
+
+.experience-detail__gallery-item figcaption {
+  font-size: 0.85rem;
+  color: #42506c;
+  line-height: 1.5;
 }
 
 .project-detail__section {
@@ -802,17 +953,20 @@ body {
     gap: 2rem;
   }
   
+  .experience-grid,
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 4rem;
   }
   
+  .experience-card,
   .project-item:nth-child(n) {
     grid-column: 1;
     margin-top: 0 !important;
   }
   
   .hero-section,
+  .experience-section,
   .projects-section,
   .photography-section,
   .contact-section {
@@ -854,6 +1008,7 @@ body {
     padding: 6rem 1.5rem 4rem;
   }
   
+  .experience-section,
   .projects-section,
   .photography-section,
   .contact-section {
@@ -862,6 +1017,11 @@ body {
   
   .projects-header {
     margin-bottom: 4rem;
+  }
+
+  .experience-card {
+    padding: 2.5rem;
+    gap: 1.25rem;
   }
   
   .photography-styles {
@@ -904,7 +1064,15 @@ body {
     font-size: clamp(3rem, 15vw, 5rem);
   }
   
+  .experience-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
   .projects-title {
     font-size: clamp(3rem, 15vw, 6rem);
+  }
+
+  .experience-card {
+    padding: 2.2rem;
   }
 }
