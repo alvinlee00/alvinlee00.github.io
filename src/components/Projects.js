@@ -1,54 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-function Projects({ scrollY }) {
+function Projects({ scrollY, onProjectSelect }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef();
 
   const projects = [
     {
       id: 1,
-      title: "Portfolio Website",
-      description: "A minimalist React portfolio featuring smooth animations, gradient backgrounds, and responsive design. Built with modern web technologies and deployed on GitHub Pages.",
-      tech: "React, CSS Animations, GitHub Pages",
-      year: "2024",
-      category: "Web Development",
-      size: "large"
+      title: "Snowflake MCP Server",
+      description: "Personal MCP server that I also rely on at work to turn Snowflake ACCOUNT_USAGE telemetry into natural-language insights. Claude-powered workflows cover security audits, cost breakdowns, and performance triage without hand-writing SQL.",
+      tech: "Python, Snowflake, MCP Protocol",
+      year: "2025",
+      category: "Data Infrastructure",
+      size: "large",
+      image: "mcp-snowflake/placeholder_project_snowflake_mcp.png",
+      imageClass: "project-image--contain",
+      slug: "snowflake-mcp"
     },
     {
       id: 2,
-      title: "Machine Learning Platform",
-      description: "Interactive platform for exploring ML algorithms with real-time visualizations and educational content. Features dynamic data processing and algorithm comparisons.",
-      tech: "Python, JavaScript, D3.js, Flask",
-      year: "2023", 
-      category: "Machine Learning",
-      size: "medium"
-    },
-    {
-      id: 3,
-      title: "E-Commerce Application",
-      description: "Full-stack e-commerce solution with inventory management, payment processing, and user authentication. Scalable architecture with modern frameworks.",
-      tech: "React, Node.js, MongoDB, Stripe API",
-      year: "2023",
-      category: "Full Stack",
-      size: "small"
-    },
-    {
-      id: 4,
-      title: "Data Visualization Dashboard",
-      description: "Real-time analytics dashboard for business intelligence with interactive charts, filtering capabilities, and export functionality.",
-      tech: "Vue.js, Chart.js, Firebase, REST APIs",
-      year: "2024",
-      category: "Data Visualization", 
-      size: "medium"
-    },
-    {
-      id: 5,
-      title: "Mobile Productivity App",
-      description: "Cross-platform mobile application for task management and productivity tracking with offline functionality and cloud sync.",
-      tech: "React Native, SQLite, Firebase, Redux",
-      year: "2023",
-      category: "Mobile Development",
-      size: "large"
+      title: "Syncify",
+      description: "Personal project that keeps my Spotify discoveries in lockstep with Apple Music. Uses ISRC matching with fuzzy fallbacks, real-time sync feedback, and OAuth-secured connections so every playlist stays identical across both services without manual upkeep.",
+      tech: "FastAPI, Python, JavaScript, Spotify API, Apple Music API, OAuth 2.0",
+      year: "2025",
+      category: "Web Application",
+      size: "large",
+      image: "syncify/placeholder_project_syncify.png",
+      slug: "syncify"
     }
   ];
 
@@ -69,6 +47,20 @@ function Projects({ scrollY }) {
     return () => observer.disconnect();
   }, []);
 
+  const resolvePublicPath = (assetPath) => {
+    if (!assetPath) {
+      return '';
+    }
+
+    if (/^https?:\/\//.test(assetPath)) {
+      return assetPath;
+    }
+
+    const base = process.env.PUBLIC_URL || '';
+    const normalized = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
+    return `${base}${normalized}`;
+  };
+
   return (
     <section id="projects" ref={sectionRef} className="projects-section">
       <div className="projects-container">
@@ -81,11 +73,18 @@ function Projects({ scrollY }) {
             <div 
               key={project.id}
               className={`project-item ${project.size} ${isVisible ? 'visible' : ''}`}
+              onClick={() => project.slug && onProjectSelect ? onProjectSelect(project.slug) : null}
+              role={project.slug ? 'button' : 'article'}
+              tabIndex={project.slug ? 0 : -1}
+              onKeyDown={(event) => {
+                if (project.slug && onProjectSelect && (event.key === 'Enter' || event.key === ' ')) {
+                  event.preventDefault();
+                  onProjectSelect(project.slug);
+                }
+              }}
             >
-              <div className="project-image">
-                <div className="project-placeholder">
-                  <span className="project-category">{project.category}</span>
-                </div>
+              <div className={`project-image ${project.imageClass ? project.imageClass : ''}`}>
+                <img src={resolvePublicPath(project.image)} alt={project.title} />
               </div>
               
               <div className="project-content">

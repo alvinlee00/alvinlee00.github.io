@@ -5,9 +5,39 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Photography from './components/Photography';
 import Contact from './components/Contact';
+import SyncifyProject from './components/SyncifyProject';
+import SnowflakeProject from './components/SnowflakeProject';
+
+const ROUTES = {
+  HOME: 'home',
+  SYNCIFY: 'syncify',
+  SNOWFLAKE: 'snowflake'
+};
+
+const buildPath = (route) => {
+  if (route === ROUTES.SYNCIFY) {
+    return '/projects/syncify';
+  }
+  if (route === ROUTES.SNOWFLAKE) {
+    return '/projects/snowflake-mcp';
+  }
+  return '/';
+};
+
+const getRouteFromPath = () => {
+  const path = window.location.pathname || '/';
+  if (path.startsWith('/projects/syncify')) {
+    return ROUTES.SYNCIFY;
+  }
+  if (path.startsWith('/projects/snowflake-mcp')) {
+    return ROUTES.SNOWFLAKE;
+  }
+  return ROUTES.HOME;
+};
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
+  const [currentRoute, setCurrentRoute] = useState(getRouteFromPath());
 
   useEffect(() => {
     let isScrolling = false;
@@ -62,15 +92,93 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentRoute(getRouteFromPath());
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (route, options = {}) => {
+    const targetRoute = route || ROUTES.HOME;
+    const { scrollTarget } = options;
+
+    const maybeScrollToTarget = (behavior = 'smooth') => {
+      if (!scrollTarget) {
+        return false;
+      }
+
+      const element = document.getElementById(scrollTarget);
+      if (element) {
+        element.scrollIntoView({ behavior, block: 'start' });
+        return true;
+      }
+
+      return false;
+    };
+
+    if (targetRoute === currentRoute) {
+      if (!maybeScrollToTarget()) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    const path = buildPath(targetRoute);
+    window.history.pushState({}, '', path);
+    setCurrentRoute(targetRoute);
+
+    if (targetRoute === ROUTES.HOME) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!maybeScrollToTarget()) {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+          }
+        });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  };
+
+  const isHome = currentRoute === ROUTES.HOME;
+
   return (
     <div className="app">
-      <Navigation />
+      <Navigation 
+        currentRoute={currentRoute}
+        onNavigate={navigateTo}
+      />
       
       <main className="main-content">
-        <Hero scrollY={scrollY} />
-        <Projects scrollY={scrollY} />
-        <Photography scrollY={scrollY} />
-        <Contact scrollY={scrollY} />
+        {isHome ? (
+          <>
+            <Hero scrollY={scrollY} />
+            <Projects scrollY={scrollY} onProjectSelect={(slug) => {
+              const routeMap = {
+                syncify: ROUTES.SYNCIFY,
+                'snowflake-mcp': ROUTES.SNOWFLAKE
+              };
+              const targetRoute = routeMap[slug];
+              if (targetRoute) {
+                navigateTo(targetRoute);
+              }
+            }} />
+            <Photography scrollY={scrollY} />
+            <Contact scrollY={scrollY} />
+          </>
+        ) : null}
+
+        {currentRoute === ROUTES.SYNCIFY ? (
+          <SyncifyProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'projects' })} />
+        ) : null}
+
+        {currentRoute === ROUTES.SNOWFLAKE ? (
+          <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'projects' })} />
+        ) : null}
       </main>
     </div>
   );

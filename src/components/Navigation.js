@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Navigation() {
+function Navigation({ currentRoute = 'home', onNavigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,20 @@ function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHome = currentRoute === 'home';
+
   const scrollToSection = (sectionId) => {
+    if (!sectionId) {
+      return;
+    }
+
+    if (!isHome) {
+      if (onNavigate) {
+        onNavigate('home', { scrollTarget: sectionId });
+      }
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ 
@@ -22,26 +35,42 @@ function Navigation() {
     }
   };
 
+  const handleLogoClick = () => {
+    if (isHome) {
+      scrollToSection('hero');
+    } else if (onNavigate) {
+      onNavigate('home');
+    }
+  };
+
   return (
     <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="nav-logo">
-          <button onClick={() => scrollToSection('hero')}>
+          <button onClick={handleLogoClick}>
             ALVIN LEE
           </button>
         </div>
         
-        <div className="nav-menu">
-          <button onClick={() => scrollToSection('projects')}>
-            PROJECTS
-          </button>
-          <button onClick={() => scrollToSection('photography')}>
-            PHOTOGRAPHY
-          </button>
-          <button onClick={() => scrollToSection('contact')}>
-            CONTACT
-          </button>
-        </div>
+        {isHome ? (
+          <div className="nav-menu">
+            <button onClick={() => scrollToSection('projects')}>
+              PROJECTS
+            </button>
+            <button onClick={() => scrollToSection('photography')}>
+              PHOTOGRAPHY
+            </button>
+            <button onClick={() => scrollToSection('contact')}>
+              CONTACT
+            </button>
+          </div>
+        ) : (
+          <div className="nav-menu nav-menu--detail">
+            <button onClick={() => onNavigate && onNavigate('home', { scrollTarget: 'projects' })}>
+              ← BACK TO PROJECTS
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );
