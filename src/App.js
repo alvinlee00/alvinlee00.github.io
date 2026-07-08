@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Photography from './components/Photography';
@@ -45,61 +46,7 @@ const getRouteFromPath = () => {
 };
 
 function App() {
-  const [scrollY, setScrollY] = useState(0);
   const [currentRoute, setCurrentRoute] = useState(getRouteFromPath());
-
-  useEffect(() => {
-    let isScrolling = false;
-    let scrollEndTimer = null;
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
-      if (!isScrolling) {
-        isScrolling = true;
-        document.body.style.scrollBehavior = 'smooth';
-      }
-      
-      clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(() => {
-        isScrolling = false;
-      }, 150);
-    };
-
-    // Enable custom smooth scrolling with slower transitions
-    document.documentElement.style.scrollBehavior = 'smooth';
-    document.documentElement.style.scrollPaddingTop = '100px';
-    
-    // Add CSS for slower scroll timing
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-      html {
-        scroll-behavior: smooth !important;
-      }
-      
-      @media (prefers-reduced-motion: no-preference) {
-        html {
-          scroll-behavior: smooth !important;
-        }
-      }
-      
-      /* Slower scroll for smoother experience */
-      body {
-        scroll-behavior: smooth;
-        scroll-snap-type: y proximity;
-      }
-    `;
-    document.head.appendChild(styleSheet);
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (styleSheet.parentNode) {
-        styleSheet.parentNode.removeChild(styleSheet);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -157,20 +104,27 @@ function App() {
 
   return (
     <div className="app">
-      <Navigation 
-        currentRoute={currentRoute}
-        onNavigate={navigateTo}
-      />
-      
+      <Navigation currentRoute={currentRoute} onNavigate={navigateTo} />
+
       <main className="main-content">
         {isHome ? (
           <>
-            <Hero scrollY={scrollY} />
-            <Experience 
-              scrollY={scrollY}
+            <Hero />
+            <About />
+            <Experience
               onExperienceSelect={(slug) => {
+                const routeMap = { 'pepsico-data-platform': ROUTES.PEPSICO };
+                const targetRoute = routeMap[slug];
+                if (targetRoute) {
+                  navigateTo(targetRoute);
+                }
+              }}
+            />
+            <Projects
+              onProjectSelect={(slug) => {
                 const routeMap = {
-                  'pepsico-data-platform': ROUTES.PEPSICO
+                  syncify: ROUTES.SYNCIFY,
+                  'snowflake-mcp': ROUTES.SNOWFLAKE
                 };
                 const targetRoute = routeMap[slug];
                 if (targetRoute) {
@@ -178,27 +132,21 @@ function App() {
                 }
               }}
             />
-            <Projects scrollY={scrollY} onProjectSelect={(slug) => {
-              const routeMap = {
-                syncify: ROUTES.SYNCIFY,
-                'snowflake-mcp': ROUTES.SNOWFLAKE
-              };
-              const targetRoute = routeMap[slug];
-              if (targetRoute) {
-                navigateTo(targetRoute);
-              }
-            }} />
-            <Photography scrollY={scrollY} />
-            <Contact scrollY={scrollY} />
+            <Photography />
+            <Contact />
+            <footer className="site-footer">
+              <span>Alvin Lee</span>
+              <span>© 2026</span>
+            </footer>
           </>
         ) : null}
 
         {currentRoute === ROUTES.SYNCIFY ? (
-          <SyncifyProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'projects' })} />
+          <SyncifyProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'work' })} />
         ) : null}
 
         {currentRoute === ROUTES.SNOWFLAKE ? (
-          <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'projects' })} />
+          <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'work' })} />
         ) : null}
 
         {currentRoute === ROUTES.PEPSICO ? (

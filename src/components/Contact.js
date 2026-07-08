@@ -1,74 +1,38 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
+import useReveal from '../useReveal';
 
-function Contact({ scrollY }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef();
+const CONTACTS = [
+  { platform: 'Email', handle: 'alvinlee225@gmail.com', url: 'mailto:alvinlee225@gmail.com' },
+  { platform: 'LinkedIn', handle: 'Alvin Lee', url: 'https://www.linkedin.com/in/alvin-lee-2201081ab' },
+  { platform: 'GitHub', handle: 'alvinlee00', url: 'https://github.com/alvinlee00' },
+  { platform: 'Resume', handle: 'View PDF', url: '/Resume_Final.pdf' }
+];
 
-  const contactLinks = [
-    {
-      platform: "Email",
-      handle: "alvinlee225@gmail.com",
-      url: "mailto:alvinlee225@gmail.com"
-    },
-    {
-      platform: "LinkedIn",
-      handle: "Alvin Lee",
-      url: "https://www.linkedin.com/in/alvin-lee-2201081ab"
-    },
-    {
-      platform: "GitHub",
-      handle: "alvinlee00",
-      url: "https://github.com/alvinlee00"
-    },
-    {
-      platform: "Resume",
-      handle: "View PDF",
-      url: "/Resume_Final.pdf"
-    }
-  ];
+const isExternal = (url) => /^https?:\/\//.test(url) || url.endsWith('.pdf');
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+function Contact() {
+  const [ref, visible] = useReveal();
 
   return (
-    <section id="contact" ref={sectionRef} className="section contact-section">
-      <div className="contact-container">
-        <div className={`section-header ${isVisible ? 'visible' : ''}`}>
-          <h2 className="section-title">
-            Let's Connect
-          </h2>
-          <p className="section-subtitle">
-            Always interested in new opportunities and collaborations
-          </p>
-        </div>
-        
-        <div className="contact-links">
-          {contactLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.url}
-              className="contact-link"
-              {...(link.platform === "Resume" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            >
-              <span className="contact-platform">{link.platform}</span>
-              <span className="contact-handle">{link.handle}</span>
-            </a>
-          ))}
-        </div>
+    <section id="contact" ref={ref} className={`section reveal ${visible ? 'visible' : ''}`}>
+      <div className="section__index">
+        <p className="section__index-num">(05)</p>
+        <h2 className="section__index-title">Contact</h2>
+        <p className="contact__statement">Let's connect.</p>
+      </div>
+
+      <div className="contact__list">
+        {CONTACTS.map((contact) => (
+          <a
+            key={contact.platform}
+            href={contact.url}
+            className="contact__row"
+            {...(isExternal(contact.url) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            <span className="contact__platform">{contact.platform}</span>
+            <span className="contact__handle">{contact.handle}</span>
+          </a>
+        ))}
       </div>
     </section>
   );

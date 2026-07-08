@@ -1,108 +1,103 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
+import useReveal from '../useReveal';
 
-function Projects({ scrollY, onProjectSelect }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef();
+const PROJECTS = [
+  {
+    id: 'snowflake',
+    year: '2025',
+    category: 'Data Infrastructure',
+    title: 'Snowflake MCP Server',
+    description:
+      'A personal MCP server I also rely on at work to turn Snowflake ACCOUNT_USAGE telemetry into natural-language insights — security audits, cost breakdowns, and performance triage without hand-writing SQL.',
+    tech: 'Python · Snowflake · MCP Protocol',
+    image: 'mcp-snowflake/placeholder_project_snowflake_mcp.png',
+    imageLabel: 'snowflake mcp — screenshot',
+    slug: 'snowflake-mcp'
+  },
+  {
+    id: 'syncify',
+    year: '2025',
+    category: 'Web Application',
+    title: 'Syncify',
+    description:
+      'Keeps my Spotify discoveries in lockstep with Apple Music using ISRC matching with fuzzy fallbacks, real-time sync feedback, and OAuth-secured connections.',
+    tech: 'FastAPI · Spotify API · Apple Music API · OAuth 2.0',
+    image: 'syncify/placeholder_project_syncify.png',
+    imageLabel: 'syncify — screenshot',
+    slug: 'syncify'
+  }
+];
 
-  const projects = [
-    {
-      id: 1,
-      title: "Snowflake MCP Server",
-      description: "Personal MCP server that I also rely on at work to turn Snowflake ACCOUNT_USAGE telemetry into natural-language insights. Claude-powered workflows cover security audits, cost breakdowns, and performance triage without hand-writing SQL.",
-      tech: "Python, Snowflake, MCP Protocol",
-      year: "2025",
-      category: "Data Infrastructure",
-      size: "large",
-      image: "mcp-snowflake/placeholder_project_snowflake_mcp.png",
-      imageClass: "project-image--contain",
-      slug: "snowflake-mcp"
-    },
-    {
-      id: 2,
-      title: "Syncify",
-      description: "Personal project that keeps my Spotify discoveries in lockstep with Apple Music. Uses ISRC matching with fuzzy fallbacks, real-time sync feedback, and OAuth-secured connections so every playlist stays identical across both services without manual upkeep.",
-      tech: "FastAPI, Python, JavaScript, Spotify API, Apple Music API, OAuth 2.0",
-      year: "2025",
-      category: "Web Application",
-      size: "large",
-      image: "syncify/placeholder_project_syncify.png",
-      slug: "syncify"
+const resolvePublicPath = (assetPath) => {
+  if (!assetPath) {
+    return '';
+  }
+  if (/^https?:\/\//.test(assetPath)) {
+    return assetPath;
+  }
+  const base = process.env.PUBLIC_URL || '';
+  const normalized = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
+  return `${base}${normalized}`;
+};
+
+function Projects({ onProjectSelect }) {
+  const [ref, visible] = useReveal();
+
+  const activate = (slug) => {
+    if (slug && onProjectSelect) {
+      onProjectSelect(slug);
     }
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const resolvePublicPath = (assetPath) => {
-    if (!assetPath) {
-      return '';
-    }
-
-    if (/^https?:\/\//.test(assetPath)) {
-      return assetPath;
-    }
-
-    const base = process.env.PUBLIC_URL || '';
-    const normalized = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
-    return `${base}${normalized}`;
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="projects-section">
-      <div className="projects-container">
-        <div className={`projects-header ${isVisible ? 'visible' : ''}`}>
-          <h2 className="projects-title">Projects</h2>
-        </div>
-        
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div 
+    <section id="work" ref={ref} className={`section reveal ${visible ? 'visible' : ''}`}>
+      <div className="section__index">
+        <p className="section__index-num">(03)</p>
+        <h2 className="section__index-title">Selected Work</h2>
+      </div>
+
+      <div>
+        {PROJECTS.map((project) => {
+          const clickable = Boolean(project.slug);
+          return (
+            <article
               key={project.id}
-              className={`project-item ${project.size} ${isVisible ? 'visible' : ''}`}
-              onClick={() => project.slug && onProjectSelect ? onProjectSelect(project.slug) : null}
-              role={project.slug ? 'button' : 'article'}
-              tabIndex={project.slug ? 0 : -1}
+              className={`work-item ${clickable ? 'is-link' : ''}`}
+              onClick={clickable ? () => activate(project.slug) : undefined}
+              role={clickable ? 'button' : undefined}
+              tabIndex={clickable ? 0 : undefined}
               onKeyDown={(event) => {
-                if (project.slug && onProjectSelect && (event.key === 'Enter' || event.key === ' ')) {
+                if (clickable && (event.key === 'Enter' || event.key === ' ')) {
                   event.preventDefault();
-                  onProjectSelect(project.slug);
+                  activate(project.slug);
                 }
               }}
             >
-              <div className={`project-image ${project.imageClass ? project.imageClass : ''}`}>
-                <img src={resolvePublicPath(project.image)} alt={project.title} />
-              </div>
-              
-              <div className="project-content">
-                <div className="project-meta">
-                  <span className="project-year">{project.year}</span>
-                  <span className="project-tech-summary">{project.tech.split(',')[0]}</span>
+              <div>
+                <div className="work-item__meta">
+                  <span>{project.year}</span>
+                  <span>{project.category}</span>
                 </div>
-                
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-                
-                <div className="project-tech">
-                  <span>{project.tech}</span>
-                </div>
+                <h3 className="work-item__title">{project.title}</h3>
+                <p className="work-item__desc">{project.description}</p>
+                <p className="work-item__tech">{project.tech}</p>
+                {clickable ? (
+                  <span className="detail-cue">
+                    Read case study <span aria-hidden="true">→</span>
+                  </span>
+                ) : null}
               </div>
-            </div>
-          ))}
-        </div>
+
+              <div className="work-item__image">
+                {project.image ? (
+                  <img src={resolvePublicPath(project.image)} alt={project.title} />
+                ) : (
+                  <span className="work-item__image-label">{project.imageLabel}</span>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

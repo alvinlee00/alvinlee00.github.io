@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+const NAV_LINKS = [
+  { id: 'about', label: '01/ABOUT' },
+  { id: 'experience', label: '02/EXP' },
+  { id: 'work', label: '03/WORK' },
+  { id: 'photography', label: '04/PHOTO' },
+  { id: 'contact', label: '05/CONTACT' }
+];
+
+const DETAIL_NAV = {
+  syncify: { label: '← BACK TO WORK', target: 'work' },
+  snowflake: { label: '← BACK TO WORK', target: 'work' },
+  pepsico: { label: '← BACK TO EXPERIENCE', target: 'experience' }
+};
 
 function Navigation({ currentRoute = 'home', onNavigate }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const isHome = currentRoute === 'home';
-
-  const detailNavigation = {
-    syncify: {
-      label: '← BACK TO PROJECTS',
-      target: 'projects'
-    },
-    snowflake: {
-      label: '← BACK TO PROJECTS',
-      target: 'projects'
-    },
-    pepsico: {
-      label: '← BACK TO EXPERIENCE',
-      target: 'experience'
-    }
-  };
 
   const scrollToSection = (sectionId) => {
     if (!sectionId) {
@@ -43,56 +31,44 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
 
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   const handleLogoClick = () => {
     if (isHome) {
-      scrollToSection('hero');
+      scrollToSection('top');
     } else if (onNavigate) {
       onNavigate('home');
     }
   };
 
   return (
-    <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className="navigation">
       <div className="nav-container">
         <div className="nav-logo">
-          <button onClick={handleLogoClick}>
-            ALVIN LEE
-          </button>
+          <button onClick={handleLogoClick}>ALVIN&nbsp;LEE</button>
         </div>
-        
+
         {isHome ? (
           <div className="nav-menu">
-            <button onClick={() => scrollToSection('experience')}>
-              EXPERIENCE
-            </button>
-            <button onClick={() => scrollToSection('projects')}>
-              PROJECTS
-            </button>
-            <button onClick={() => scrollToSection('photography')}>
-              PHOTOGRAPHY
-            </button>
-            <button onClick={() => scrollToSection('contact')}>
-              CONTACT
-            </button>
+            {NAV_LINKS.map((link) => (
+              <button key={link.id} onClick={() => scrollToSection(link.id)}>
+                {link.label}
+              </button>
+            ))}
           </div>
         ) : (
           <div className="nav-menu nav-menu--detail">
             <button
               onClick={() => {
-                const config = detailNavigation[currentRoute] || detailNavigation.syncify;
+                const config = DETAIL_NAV[currentRoute] || DETAIL_NAV.syncify;
                 if (onNavigate) {
                   onNavigate('home', { scrollTarget: config.target });
                 }
               }}
             >
-              {(detailNavigation[currentRoute] || detailNavigation.syncify).label}
+              {(DETAIL_NAV[currentRoute] || DETAIL_NAV.syncify).label}
             </button>
           </div>
         )}

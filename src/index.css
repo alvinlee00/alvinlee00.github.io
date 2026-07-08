@@ -1,13 +1,52 @@
+:root {
+  /* Ink & text */
+  --ink: #1a1a1a;
+  --body: #555;
+  --muted: #8a8a8a;
+  --muted-2: #9a9a9a;
+  --faint: #a0a0a0;
+  --faint-2: #c0c0c0;
+  --bg: #ffffff;
+
+  /* Slideshow stages */
+  --stage-bleed: #0e0e0e;
+  --stage-mat: #f4f4f2;
+
+  /* Hairlines */
+  --rule: 1px solid #1a1a1a;
+  --rule-soft: 1px solid rgba(0, 0, 0, 0.12);
+
+  /* Type stacks */
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #1a1a1a;
+  color: #fff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--mono);
 }
