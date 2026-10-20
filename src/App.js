@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
-import Principles from './components/Principles';
 import Contact from './components/Contact';
 import SyncifyProject from './components/SyncifyProject';
 import SnowflakeProject from './components/SnowflakeProject';
@@ -118,15 +117,6 @@ function App() {
         {isHome ? (
           <>
             <Hero />
-            <Experience
-              onExperienceSelect={(slug) => {
-                const routeMap = { pepsico: ROUTES.PEPSICO, blueflame: ROUTES.BLUEFLAME };
-                const targetRoute = routeMap[slug];
-                if (targetRoute) {
-                  navigateTo(targetRoute);
-                }
-              }}
-            />
             <Projects
               onProjectSelect={(slug) => {
                 const routeMap = {
@@ -139,13 +129,17 @@ function App() {
                 }
               }}
             />
-            <Principles />
+            <Experience
+              onExperienceSelect={(slug) => {
+                const routeMap = { pepsico: ROUTES.PEPSICO, blueflame: ROUTES.BLUEFLAME };
+                const targetRoute = routeMap[slug];
+                if (targetRoute) {
+                  navigateTo(targetRoute);
+                }
+              }}
+            />
             <About />
             <Contact />
-            <footer className="site-footer">
-              <span>© 2026 Alvin Lee</span>
-              <span>Built with React</span>
-            </footer>
           </>
         ) : null}
 

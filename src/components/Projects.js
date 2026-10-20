@@ -4,21 +4,19 @@ import useReveal from '../useReveal';
 const PROJECTS = [
   {
     id: 'snowflake',
-    year: '2025',
-    title: 'Snowflake Analytics MCP Server',
+    title: 'Snowflake MCP Server',
+    meta: '2025 · Python, MCP',
     description:
-      'An MCP server with 15+ tools that turns Snowflake ACCOUNT_USAGE telemetry into plain-language security audits, cost breakdowns and performance triage, secured with RSA key auth.',
-    tech: ['Python', 'FastMCP', 'pandas', 'Snowflake'],
+      'Plain-language security audits, cost breakdowns and performance triage over Snowflake telemetry, with 15+ tools behind one MCP server.',
     image: 'mcp-snowflake/placeholder_project_snowflake_mcp.png',
     slug: 'snowflake-mcp'
   },
   {
     id: 'syncify',
-    year: '2025',
     title: 'Syncify',
+    meta: '2025 · FastAPI, React',
     description:
-      'Keeps Spotify and Apple Music libraries in step using ISRC matching with fuzzy fallbacks, reaching ~95% track match accuracy, with live sync feedback and OAuth-secured connections.',
-    tech: ['FastAPI', 'React', 'OAuth 2.0'],
+      'Keeps Spotify and Apple Music libraries in step using ISRC matching with fuzzy fallbacks, at ~95% track match accuracy.',
     image: 'syncify/placeholder_project_syncify.png',
     slug: 'syncify'
   }
@@ -35,7 +33,12 @@ function Projects({ onProjectSelect }) {
 
   return (
     <section id="work" ref={ref} className={`section reveal ${visible ? 'visible' : ''}`}>
-      <h2 className="section__label">Projects</h2>
+      <div className="section__head">
+        <h2 className="section__title">
+          Selected <em>work</em>
+        </h2>
+        <span className="label">(02)</span>
+      </div>
 
       <div className="cards">
         {PROJECTS.map((project) => (
@@ -46,19 +49,15 @@ function Projects({ onProjectSelect }) {
           >
             <span className="card__image">
               <img src={resolvePublicPath(project.image)} alt="" />
+              <span className="card__cta" aria-hidden="true">
+                View case study ↗
+              </span>
             </span>
-            <span className="card__meta">{project.year}</span>
-            <span className="card__title">
-              {project.title} <span aria-hidden="true">→</span>
+            <span className="card__row">
+              <span className="card__title">{project.title}</span>
+              <span className="card__meta">{project.meta}</span>
             </span>
             <span className="card__desc">{project.description}</span>
-            <span className="tags">
-              {project.tech.map((tech) => (
-                <span key={tech} className="tags__item">
-                  {tech}
-                </span>
-              ))}
-            </span>
           </button>
         ))}
       </div>

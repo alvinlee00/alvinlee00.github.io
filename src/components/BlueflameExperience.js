@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
 
+const STATS = [
+  { value: '~1,900', label: 'Logins affected by the launch-week login loop I triaged' },
+  { value: '15K', label: 'Workspaces in a staged, fail-closed backfill' },
+  { value: '99%', label: 'Workspace query latency cut, 90 ms to 0.8 ms' },
+  { value: '160', label: 'PRs shipped across 9 repositories' }
+];
+
 function BlueflameExperience({ onBack }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -32,6 +39,14 @@ function BlueflameExperience({ onBack }) {
             <p>160 PRs across 9 repositories and 2 GitHub orgs, plus 47 reviews for teammates.</p>
           </div>
         </div>
+        <dl className="project-detail__stats">
+          {STATS.map((stat) => (
+            <div key={stat.label}>
+              <dt>{stat.value}</dt>
+              <dd>{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
       </header>
 
       <section className="project-detail__section">

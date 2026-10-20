@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
+  { id: 'work', label: 'Work' },
   { id: 'experience', label: 'Experience' },
-  { id: 'work', label: 'Projects' },
-  { id: 'principles', label: 'Approach' },
+  { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' }
 ];
 
 const DETAIL_NAV = {
-  syncify: { label: '← Projects', target: 'work' },
-  snowflake: { label: '← Projects', target: 'work' },
+  syncify: { label: '← Work', target: 'work' },
+  snowflake: { label: '← Work', target: 'work' },
   pepsico: { label: '← Experience', target: 'experience' },
   blueflame: { label: '← Experience', target: 'experience' }
 };
@@ -85,7 +85,7 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
     <nav className="navigation">
       <div className="nav-container">
         <button className="nav-logo" onClick={handleLogoClick}>
-          Alvin Lee
+          Alvin Lee<span className="nav-logo__mark">®</span>
         </button>
 
         <div className="nav-menu">
@@ -101,7 +101,7 @@ function Navigation({ currentRoute = 'home', onNavigate }) {
             </button>
           )}
           <a className="nav-link nav-link--resume" href="/Resume_Final.pdf" target="_blank" rel="noopener noreferrer">
-            Resume
+            Resume ↗
           </a>
           <ThemeToggle />
         </div>
