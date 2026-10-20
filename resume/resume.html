@@ -50,13 +50,13 @@
     <div class="line sub"><span>Software Engineer</span></div>
     <ul>
       <li>Led Blueflame’s engineering for the Auth0 identity integration with Grata, a cross-company platform launch, architecting the shared identity model, privileged M2M API and login handoff across 4 repositories.</li>
+      <li>Wrote the Auth0 RFC that kept internal accounts as the identity and Auth0 as the credential, enabling reversible per-account migration, and cut the cross-company identity API from ~28 methods to 7.</li>
+      <li>Chose Grata’s stable UUID over Auth0 IDs as the cross-system key and wrapped the existing token path instead of rewriting login, removing regression risk before launch.</li>
       <li>Owned org, user and seat provisioning between both platforms, enforcing US/EU data residency and a Grata-first write contract that prevents orphaned users.</li>
       <li>Served as incident lead for identity failures through launch, running triage on a production login loop affecting ~1,900 logins and coordinating fixes across both companies.</li>
       <li>Root-caused ~670 duplicate production accounts to a retry/timeout race by correlating AWS CloudWatch and Datadog logs, and proposed idempotency keys to prevent recurrence.</li>
       <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
       <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
-      <li>Cut workspace query latency 99% (90 ms to 0.8 ms) via indexing and removed a 7–8 s <span style="white-space:nowrap">per-member</span> scan.</li>
-      <li>Authored the identity RFC, rollout runbook and API docs; shipped 160 PRs across 9 repos, reviewed 47.</li>
     </ul>
   </div>
 
