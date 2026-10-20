@@ -23,12 +23,12 @@ function SnowflakeProject({ onBack }) {
     <article className="project-detail" id="snowflake-detail">
       <header className="project-detail__hero">
         <div className="project-detail__meta">
-          <span className="project-detail__badge">Personal project + work accelerator · 2025-present</span>
+          <span className="project-detail__badge">Side project · 2025</span>
           <span className="project-detail__tag">MCP · Snowflake · Python</span>
         </div>
         <h1 className="project-detail__title">Snowflake MCP Server</h1>
         <p className="project-detail__lede">
-          I built a Model Context Protocol server so Claude Desktop can interrogate Snowflake ACCOUNT_USAGE
+          I built a Model Context Protocol server so Claude Desktop can query Snowflake ACCOUNT_USAGE
           telemetry, turning raw operational data into natural-language insights I rely on personally and
           share with teammates at work.
         </p>
