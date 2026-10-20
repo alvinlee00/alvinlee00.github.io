@@ -4,24 +4,23 @@
 <meta charset="utf-8">
 <title>Alvin Lee – Resume</title>
 <style>
-  @font-face { font-family: 'EB Garamond Resume'; font-weight: 400; src: url('fonts/eb-garamond-latin-400-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'EB Garamond Resume'; font-weight: 400; font-style: italic; src: url('fonts/eb-garamond-latin-400-italic.woff2') format('woff2'); }
-  @font-face { font-family: 'EB Garamond Resume'; font-weight: 600; src: url('fonts/eb-garamond-latin-600-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'EB Garamond Resume'; font-weight: 700; src: url('fonts/eb-garamond-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Charis Resume'; font-weight: 400; src: url('fonts/charis-sil-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Charis Resume'; font-weight: 400; font-style: italic; src: url('fonts/charis-sil-latin-400-italic.woff2') format('woff2'); }
+  @font-face { font-family: 'Charis Resume'; font-weight: 700; src: url('fonts/charis-sil-latin-700-normal.woff2') format('woff2'); }
 
-  @page { size: Letter; margin: 0.55in 0.65in; }
+  @page { size: Letter; margin: 0.55in 0.6in; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'EB Garamond Resume', Garamond, 'Times New Roman', serif; font-size: 11pt; line-height: 1.24; color: #000; }
+  body { font-family: 'Charis Resume', Charter, Georgia, serif; font-size: 10.5pt; line-height: 1.24; color: #000; }
   a { color: inherit; text-decoration: none; }
   b { font-weight: 700; }
 
   header { text-align: center; }
-  h1 { font-size: 24pt; font-weight: 600; letter-spacing: 0.04em; line-height: 1.1; }
+  h1 { font-size: 22pt; font-weight: 700; letter-spacing: 0.04em; line-height: 1.1; }
   .contact { margin-top: 2pt; }
   .contact span + span::before { content: "|"; margin: 0 6pt; }
 
   section { margin-top: 11pt; }
-  h2 { font-size: 11pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  h2 { font-size: 10.5pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
        border-bottom: 1pt solid #000; padding-bottom: 1pt; margin-bottom: 4pt; }
 
   .entry + .entry { margin-top: 7pt; }
@@ -55,8 +54,8 @@
       <li>Root-caused ~670 duplicate production accounts to a retry/timeout race by correlating AWS CloudWatch and Datadog logs, and proposed idempotency keys to prevent recurrence.</li>
       <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
       <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
-      <li>Cut workspace query latency 99% (90 ms to 0.8 ms) via indexing and removed a 7–8 s per&#8209;member scan.</li>
-      <li>Authored the identity RFC, rollout runbook and API docs; shipped 160 PRs across 9 repositories and reviewed 47.</li>
+      <li>Cut workspace query latency 99% (90 ms to 0.8 ms) via indexing and removed a 7–8 s <span style="white-space:nowrap">per-member</span> scan.</li>
+      <li>Authored the identity RFC, rollout runbook and API docs; shipped 160 PRs across 9 repos, reviewed 47.</li>
     </ul>
   </div>
 
@@ -64,7 +63,7 @@
     <div class="line"><b>PepsiCo</b><span>Jul 2023 – Jan 2026</span></div>
     <div class="line sub"><span>Software Engineer, Data Platform</span></div>
     <ul>
-      <li>Built self-service Snowflake provisioning (Jira, GitHub, Airflow), cutting turnaround from 2 days to under 1 hour.</li>
+      <li>Built self-service Snowflake provisioning (Jira, GitHub, Airflow), cutting turnaround from 2 days to 1 hour.</li>
       <li>Migrated 200+ service accounts to RSA key auth with zero downtime, backed by automated key rotation in Terraform and Azure Key Vault.</li>
       <li>Served as global Terraform SME, building modules for 5 multi-region Snowflake accounts that cut provisioning time 60%; mentored 15+ engineers.</li>
     </ul>
@@ -79,11 +78,11 @@
   <h2>Projects</h2>
   <div class="entry">
     <div class="line"><span><a href="https://github.com/alvinlee00/mcp-snowflake-server"><b>Snowflake Analytics MCP Server</b></a></span><span class="sub">Python, FastMCP, pandas</span></div>
-    <ul><li>Built an MCP server with 15+ tools for Snowflake cost, security and anomaly analysis, secured with RSA key auth.</li></ul>
+    <ul><li>Built an MCP server with 15+ tools for Snowflake cost, security and anomaly analysis.</li></ul>
   </div>
   <div class="entry">
     <div class="line"><span><a href="https://github.com/alvinlee00/Syncify"><b>Syncify</b></a></span><span class="sub">FastAPI, React, OAuth 2.0</span></div>
-    <ul><li>Built a Spotify-to-Apple Music migration service with ISRC and fuzzy matching, reaching ~95% track match accuracy.</li></ul>
+    <ul><li>Built a Spotify-to-Apple Music migration service with ~95% track match accuracy.</li></ul>
   </div>
 </section>
 
