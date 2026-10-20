@@ -4,62 +4,105 @@
 <meta charset="utf-8">
 <title>Alvin Lee – Resume</title>
 <style>
-  @page { size: Letter; margin: 0.5in 0.75in; }
+  @font-face { font-family: 'Inter Resume'; font-weight: 400; src: url('fonts/inter-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter Resume'; font-weight: 600; src: url('fonts/inter-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter Resume'; font-weight: 700; src: url('fonts/inter-latin-700-normal.woff2') format('woff2'); }
+  @page { size: Letter; margin: 0.55in 0.7in; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Calibri, Carlito, sans-serif; font-size: 11pt; line-height: 1.2; color: #000; }
-  a { color: #0563c1; }
-  h1 { font-size: 22pt; font-weight: normal; text-align: center; line-height: 1.1; }
-  .contact { text-align: center; margin-bottom: 9pt; }
-  h2 { font-size: 11pt; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 1pt; margin: 8pt 0 4pt; }
-  .row { display: flex; justify-content: space-between; font-weight: bold; margin-top: 4pt; }
-  .row .org { font-weight: normal; font-style: italic; }
-  ul { margin: 2pt 0 0 0.25in; }
-  li { padding-left: 0.1in; margin-bottom: 1.5pt; }
-  p { margin-top: 2pt; }
+  :root { --ink: #1a1a1a; --muted: #5f6368; --accent: #1f4e79; --rule: #d0d4d9; }
+  body { font-family: 'Inter Resume', sans-serif; font-size: 9.5pt; line-height: 1.45; color: var(--ink); font-feature-settings: "tnum"; }
+  a { color: inherit; text-decoration: none; }
+
+  header { margin-bottom: 14pt; }
+  h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .contact { color: var(--muted); margin-top: 4pt; }
+  .contact span + span::before { content: "·"; margin: 0 6pt; color: var(--rule); }
+
+  section { margin-top: 13pt; }
+  h2 { font-size: 8.5pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+       border-bottom: 0.75pt solid var(--rule); padding-bottom: 3pt; margin-bottom: 7pt; }
+
+  .entry + .entry { margin-top: 9pt; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .role { font-weight: 600; font-size: 10pt; }
+  .org { font-weight: 400; color: var(--muted); }
+  .date { color: var(--muted); white-space: nowrap; }
+
+  ul { list-style: none; margin-top: 3pt; }
+  li { position: relative; padding-left: 11pt; }
+  li + li { margin-top: 2.5pt; }
+  li::before { content: ""; position: absolute; left: 1pt; top: 0.6em; width: 3.5pt; height: 3.5pt; border-radius: 50%; background: var(--accent); }
+
+  .skills { display: grid; grid-template-columns: 78pt 1fr; row-gap: 2pt; }
+  .skills dt { font-weight: 600; }
+  .stack { color: var(--muted); }
 </style>
 </head>
 <body>
-<h1>Alvin Lee</h1>
-<div class="contact">alvinlee225@gmail.com | (908) 938-8937 | <a href="https://github.com/alvinlee00">GitHub</a> | <a href="http://www.linkedin.com/in/alvin-lee-2201081ab">LinkedIn</a> | <a href="https://leealvin.dev/">Portfolio</a></div>
+<header>
+  <h1>Alvin Lee</h1>
+  <div class="contact">
+    <span>alvinlee225@gmail.com</span><span>(908) 938-8937</span><span><a href="https://leealvin.dev/">leealvin.dev</a></span><span><a href="https://github.com/alvinlee00">github.com/alvinlee00</a></span><span><a href="http://www.linkedin.com/in/alvin-lee-2201081ab">LinkedIn</a></span>
+  </div>
+</header>
 
-<h2>Technical Skills</h2>
-<p><b>Languages:</b> Python, SQL | <b>Cloud &amp; Infra:</b> AWS, Azure, Docker, Kubernetes, Terraform | <b>Data:</b> MongoDB/DocumentDB, Redis, Snowflake, DBT, Airflow | <b>Identity:</b> Auth0, OAuth 2.0/OIDC, JWT</p>
+<section>
+  <h2>Experience</h2>
 
-<h2>Experience</h2>
-<div class="row"><span>Software Engineer, <span class="org">Blueflame AI</span></span><span>January 2026 – Present</span></div>
-<ul>
-  <li>Owned the Blueflame side of the Auth0 identity integration with Grata for a cross-company platform launch, going from no Auth0 experience to merged auth PRs in ~9 days: designed the shared-key identity model, a privileged M2M API, a login handoff across 4 repos, and org, user and seat provisioning.</li>
-  <li>Served as primary engineer for launch-window identity incidents, correlating AWS CloudWatch and Datadog logs across both systems; sized a production login loop (~1,900 logins at risk), ran the triage call, and traced ~670 duplicate accounts to a retry/timeout race, proposing idempotency keys.</li>
-  <li>Shipped Datasite VDR sharing to production on a fail-closed, least-privilege design applied consistently to search, RAG and code execution; closed 3 metadata leaks found in testing and ran a staged backfill (dry run, single-grant pilot, then 142 accounts and ~15K workspaces).</li>
-  <li>Built the permission foundation for Blueprints V3 (groups, ACLs, all-or-nothing bulk operations, edit-lock leases), benchmarking 10K blueprints across 15 folder levels and validating migrations on production data.</li>
-  <li>Cut a workspace membership query from 90 ms to 0.8 ms with a targeted index and removed a 7–8 s per&#8209;member scan; authored 160 PRs across 9 repos in 9 months.</li>
-</ul>
+  <div class="entry">
+    <div class="head"><span class="role">Software Engineer <span class="org">· Blueflame AI</span></span><span class="date">Jan 2026 – Present</span></div>
+    <ul>
+      <li>Led Blueflame’s side of the Auth0 identity integration with Grata for a cross-company platform launch: identity model, M2M API, login handoff and provisioning across 4 repos.</li>
+      <li>Went from no Auth0 experience to merged auth PRs in ~9 days, then became the primary responder for launch-window identity incidents.</li>
+      <li>Traced ~670 duplicate accounts to a retry/timeout race and sized a login loop affecting ~1,900 logins.</li>
+      <li>Shipped Datasite VDR sharing on a fail-closed, least-privilege design, with a staged backfill across 142 accounts and ~15K workspaces.</li>
+      <li>Built the Blueprints V3 permission layer (groups, ACLs, bulk operations), benchmarked at 10K blueprints.</li>
+      <li>Cut a workspace query from 90 ms to 0.8 ms with a targeted index; authored 160 PRs across 9 repos.</li>
+    </ul>
+  </div>
 
-<div class="row"><span>Software Engineer - Data Platform, <span class="org">PepsiCo</span></span><span>July 2023 – January 2026</span></div>
-<ul>
-  <li>Built a self-service data platform integrating Jira Service Management, GitHub webhooks and Snowflake APIs with Airflow orchestration, cutting manual provisioning from two days to under one hour.</li>
-  <li>Engineered a Snowflake MCP audit server and a Terraform + Azure Key Vault key-rotation pipeline that moved 200+ service accounts to RSA auth with zero downtime and rotates their keys monthly via CI/CD.</li>
-  <li>As global Terraform SME, designed reusable modules for 5 multi-region Snowflake accounts, reducing provisioning time by 60% and mentoring 15+ engineers on adoption.</li>
-  <li>Led data platform integration for an acquired brand, consolidating pipelines and enforcing PII compliance through secure hashing.</li>
-</ul>
+  <div class="entry">
+    <div class="head"><span class="role">Software Engineer, Data Platform <span class="org">· PepsiCo</span></span><span class="date">Jul 2023 – Jan 2026</span></div>
+    <ul>
+      <li>Built a self-service Snowflake provisioning platform (Jira, GitHub webhooks, Airflow), cutting turnaround from two days to under an hour.</li>
+      <li>Moved 200+ service accounts to RSA key auth with zero downtime, using an MCP audit server and automated key rotation in Terraform and Azure Key Vault.</li>
+      <li>As global Terraform SME, built reusable modules for 5 multi-region Snowflake accounts, cutting provisioning time 60% and mentoring 15+ engineers.</li>
+    </ul>
+  </div>
 
-<div class="row"><span>Software Engineering Intern - Data Platform, <span class="org">PepsiCo</span></span><span>May 2022 – August 2022</span></div>
-<ul>
-  <li>Built a pipeline monitoring and alerting stack (Python + SQL) that reduced MTTR by ~40%.</li>
-</ul>
+  <div class="entry">
+    <div class="head"><span class="role">Software Engineering Intern, Data Platform <span class="org">· PepsiCo</span></span><span class="date">May 2022 – Aug 2022</span></div>
+    <ul>
+      <li>Built pipeline monitoring and alerting in Python and SQL that reduced MTTR by ~40%.</li>
+    </ul>
+  </div>
+</section>
 
-<h2>Projects</h2>
-<div class="row"><span>Snowflake Analytics MCP Server (<a href="https://github.com/alvinlee00/mcp-snowflake-server">GitHub</a>)</span></div>
-<ul>
-  <li>Built a Python (FastMCP) server with 15+ tools for Snowflake cost optimization, security monitoring and anomaly detection, secured with RSA key auth, query validation and schema-level access controls.</li>
-</ul>
-<div class="row"><span>Syncify (<a href="https://github.com/alvinlee00/Syncify">GitHub</a>)</span></div>
-<ul>
-  <li>Built a Spotify-to-Apple Music migration service with ISRC matching and fuzzy fallback (~95% track match accuracy), OAuth 2.0, rate limiting and fault-tolerant sync for large playlists.</li>
-</ul>
+<section>
+  <h2>Projects</h2>
+  <div class="entry">
+    <div class="head"><span class="role"><a href="https://github.com/alvinlee00/mcp-snowflake-server">Snowflake Analytics MCP Server</a></span><span class="stack">Python, FastMCP, pandas</span></div>
+    <ul><li>MCP server with 15+ tools for Snowflake cost, security and anomaly analysis, secured with RSA key auth.</li></ul>
+  </div>
+  <div class="entry">
+    <div class="head"><span class="role"><a href="https://github.com/alvinlee00/Syncify">Syncify</a></span><span class="stack">Spotify &amp; Apple Music APIs, OAuth 2.0</span></div>
+    <ul><li>Playlist migration service with ISRC and fuzzy matching, reaching ~95% track match accuracy.</li></ul>
+  </div>
+</section>
 
-<h2>Education</h2>
-<div class="row"><span>New York University: <span style="font-weight:normal">B.A. in Mathematics and Computer Science</span></span><span>May 2023</span></div>
-<p><b>Relevant Coursework:</b> Probability, Statistics, Linear Algebra, Optimization, Data Structures, Algorithms</p>
+<section>
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Languages</dt><dd>Python, SQL</dd>
+    <dt>Infrastructure</dt><dd>AWS, Azure, Terraform, Docker, Kubernetes</dd>
+    <dt>Data</dt><dd>MongoDB / DocumentDB, Redis, Snowflake, dbt, Airflow</dd>
+    <dt>Identity</dt><dd>Auth0, OAuth 2.0 / OIDC, JWT</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="head"><span class="role">New York University <span class="org">· B.A. Mathematics and Computer Science</span></span><span class="date">May 2023</span></div>
+</section>
 </body>
 </html>
