@@ -5,17 +5,18 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
-import Photography from './components/Photography';
 import Contact from './components/Contact';
 import SyncifyProject from './components/SyncifyProject';
 import SnowflakeProject from './components/SnowflakeProject';
 import PepsicoExperience from './components/PepsicoExperience';
+import BlueflameExperience from './components/BlueflameExperience';
 
 const ROUTES = {
   HOME: 'home',
   SYNCIFY: 'syncify',
   SNOWFLAKE: 'snowflake',
-  PEPSICO: 'pepsico'
+  PEPSICO: 'pepsico',
+  BLUEFLAME: 'blueflame'
 };
 
 const buildPath = (route) => {
@@ -27,6 +28,9 @@ const buildPath = (route) => {
   }
   if (route === ROUTES.PEPSICO) {
     return '/experience/pepsico';
+  }
+  if (route === ROUTES.BLUEFLAME) {
+    return '/experience/blueflame';
   }
   return '/';
 };
@@ -41,6 +45,9 @@ const getRouteFromPath = () => {
   }
   if (path.startsWith('/experience/pepsico')) {
     return ROUTES.PEPSICO;
+  }
+  if (path.startsWith('/experience/blueflame')) {
+    return ROUTES.BLUEFLAME;
   }
   return ROUTES.HOME;
 };
@@ -110,16 +117,6 @@ function App() {
         {isHome ? (
           <>
             <Hero />
-            <About />
-            <Experience
-              onExperienceSelect={(slug) => {
-                const routeMap = { 'pepsico-data-platform': ROUTES.PEPSICO };
-                const targetRoute = routeMap[slug];
-                if (targetRoute) {
-                  navigateTo(targetRoute);
-                }
-              }}
-            />
             <Projects
               onProjectSelect={(slug) => {
                 const routeMap = {
@@ -132,12 +129,17 @@ function App() {
                 }
               }}
             />
-            <Photography />
+            <Experience
+              onExperienceSelect={(slug) => {
+                const routeMap = { pepsico: ROUTES.PEPSICO, blueflame: ROUTES.BLUEFLAME };
+                const targetRoute = routeMap[slug];
+                if (targetRoute) {
+                  navigateTo(targetRoute);
+                }
+              }}
+            />
+            <About />
             <Contact />
-            <footer className="site-footer">
-              <span>Alvin Lee</span>
-              <span>© 2026</span>
-            </footer>
           </>
         ) : null}
 
@@ -147,6 +149,10 @@ function App() {
 
         {currentRoute === ROUTES.SNOWFLAKE ? (
           <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'work' })} />
+        ) : null}
+
+        {currentRoute === ROUTES.BLUEFLAME ? (
+          <BlueflameExperience onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'experience' })} />
         ) : null}
 
         {currentRoute === ROUTES.PEPSICO ? (

@@ -9,13 +9,13 @@ function PepsicoExperience({ onBack }) {
     <article className="project-detail experience-detail" id="pepsico-experience">
       <header className="project-detail__hero">
         <div className="project-detail__meta">
-          <span className="project-detail__badge">Full-time role | July 2023 to Present</span>
-          <span className="project-detail__tag">Software Engineer - Data Platform</span>
+          <span className="project-detail__badge">Full-time role · Jul 2023 to Jan 2026</span>
+          <span className="project-detail__tag">Software Engineer, Data Platform</span>
         </div>
-        <h1 className="project-detail__title">PepsiCo - Platform Engineering For Every Data Team</h1>
+        <h1 className="project-detail__title">PepsiCo: platform engineering for every data team</h1>
         <p className="project-detail__lede">
-          PepsiCo trusts our Snowflake estate and platform tooling for decisions across supply chain, finance,
-          and marketing. I own the automation, infrastructure-as-code, and governance that keep that ecosystem
+          PepsiCo relies on its Snowflake estate and platform tooling for decisions across supply chain, finance,
+          and marketing. I owned the automation, infrastructure-as-code, and governance that keep that ecosystem
           fast, compliant, and self-serve.
         </p>
         <div className="project-detail__summary">
@@ -52,7 +52,7 @@ function PepsicoExperience({ onBack }) {
       <section className="project-detail__section">
         <h3>Bringing new brands online</h3>
         <p>
-          When PepsiCo acquires a brand I am on point to consolidate their data estate. That meant stitching
+          When PepsiCo acquired a brand I was on point to consolidate their data estate. That meant stitching
           together disparate pipelines and applying secure hashing so personally identifiable information
           meets corporate policy before it lands in Snowflake.
         </p>
@@ -66,12 +66,12 @@ function PepsicoExperience({ onBack }) {
         <h3>Scaling infrastructure-as-code</h3>
         <p>
           As the global Terraform SME I codified reusable modules that stand up five multi-region Snowflake
-          accounts. Thousands of objects-databases, schemas, system roles, users-are templated and peer
+          accounts. Thousands of objects (databases, schemas, system roles, users) are templated and peer
           reviewed. Provisioning time dropped by 60% and the same patterns now power new workloads within
           minutes.
         </p>
         <p>
-          I also mentor 15+ engineers to contribute confidently, reviewing module design and pairing on pull
+          I also mentored 15+ engineers to contribute confidently, reviewing module design and pairing on pull
           requests so our standards scale with the team.
         </p>
       </section>
@@ -81,16 +81,16 @@ function PepsicoExperience({ onBack }) {
         <p>
           I originally joined as a data platform intern, where I built Python and SQL monitoring pipelines
           that track performance metrics and alert on anomalies. That observability work cut mean time to
-          resolution by 40% and set the stage for the automation focus I carry today.
+          resolution by 40% and set the stage for the automation focus that followed.
         </p>
       </section>
 
       <section className="project-detail__section">
-        <h3>Looking ahead</h3>
+        <h3>Key stewardship and dbt</h3>
         <p>
-          Current efforts focus on enterprise key stewardship-rotating 200+ Snowflake service keys each month
-          via Azure Key Vault-and stewarding dbt upgrades so analytics teams inherit modern testing and
-          documentation out of the box. The goal is the same: a platform that stays reliable as PepsiCo grows.
+          In my last stretch I led enterprise key stewardship, migrating 200+ Snowflake service accounts to
+          RSA keys rotated through Azure Key Vault with zero downtime, and stewarded dbt upgrades so analytics teams inherit modern testing and
+          documentation out of the box. The goal was always the same: a platform that stays reliable as PepsiCo grows.
         </p>
       </section>
 
