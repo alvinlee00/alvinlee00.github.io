@@ -4,22 +4,38 @@ import useReveal from '../useReveal';
 const EXPERIENCES = [
   {
     id: 'blueflame',
-    company: 'BlueFlame AI',
+    company: 'Blueflame AI',
     dates: 'Jan 2026 — Present',
-    role: 'Software Engineer, Core Platform',
-    description:
-      'Re-architected the AI workflow-automation platform from a flat library into a shared, permissioned filesystem — folders, templates, and per-user copies — so teams can organize, share, and co-edit automations, backed by an account-scoped permission model and Redis lease/heartbeat edit locks.',
-    focus: 'Permission models · Edit-lock concurrency · Bulk validation'
+    role: 'Software Engineer',
+    highlights: [
+      'Led Blueflame’s engineering for the Auth0 identity integration with Grata: the shared identity model, a privileged M2M API and a login handoff across 4 repositories.',
+      'Owned org, user and seat provisioning between both platforms, with US/EU data residency and a write contract that never leaves orphaned users.',
+      'Incident lead for identity through launch, including triage of a production login loop affecting ~1,900 logins.',
+      'Shipped Datasite VDR sharing with a fail-closed, least-privilege model enforced across search, RAG and code execution.'
+    ],
+    tags: ['Python', 'Auth0', 'OAuth / OIDC', 'MongoDB', 'Redis', 'AWS', 'Terraform'],
+    slug: 'blueflame'
   },
   {
     id: 'pepsico',
     company: 'PepsiCo',
-    dates: '2023 — 2025',
+    dates: 'Jul 2023 — Jan 2026',
     role: 'Software Engineer, Data Platform',
-    description:
-      'Designed data platforms that get information into the right hands fast — shipping self-service tooling, IaC standards, and governed integrations for PepsiCo teams.',
-    focus: 'Airflow automation · Terraform IaC · Snowflake governance',
-    slug: 'pepsico-data-platform'
+    highlights: [
+      'Built self-service Snowflake provisioning on Jira, GitHub and Airflow, cutting turnaround from 2 days to under 1 hour.',
+      'Migrated 200+ service accounts to RSA key auth with zero downtime and automated rotation in Terraform and Azure Key Vault.',
+      'Global Terraform SME for 5 multi-region Snowflake accounts; mentored 15+ engineers.'
+    ],
+    tags: ['Python', 'SQL', 'Airflow', 'Terraform', 'Snowflake', 'Azure'],
+    slug: 'pepsico'
+  },
+  {
+    id: 'pepsico-intern',
+    company: 'PepsiCo',
+    dates: 'May 2022 — Aug 2022',
+    role: 'Software Engineering Intern, Data Platform',
+    highlights: ['Built pipeline monitoring and alerting in Python and SQL that reduced MTTR by ~40%.'],
+    tags: []
   }
 ];
 
@@ -34,44 +50,37 @@ function Experience({ onExperienceSelect }) {
 
   return (
     <section id="experience" ref={ref} className={`section reveal ${visible ? 'visible' : ''}`}>
-      <div className="section__index">
-        <p className="section__index-num">(02)</p>
-        <h2 className="section__index-title">Experience</h2>
-      </div>
+      <h2 className="section__label">Experience</h2>
 
-      <div>
-        {EXPERIENCES.map((exp) => {
-          const clickable = Boolean(exp.slug);
-          return (
-            <article
-              key={exp.id}
-              className={`exp-item ${clickable ? 'is-link' : ''}`}
-              onClick={clickable ? () => activate(exp.slug) : undefined}
-              role={clickable ? 'button' : undefined}
-              tabIndex={clickable ? 0 : undefined}
-              onKeyDown={(event) => {
-                if (clickable && (event.key === 'Enter' || event.key === ' ')) {
-                  event.preventDefault();
-                  activate(exp.slug);
-                }
-              }}
-            >
-              <div className="exp-item__meta">
-                <span>{exp.company}</span>
-                <span>{exp.dates}</span>
-              </div>
-              <h3 className="exp-item__role">{exp.role}</h3>
-              <p className="exp-item__desc">{exp.description}</p>
-              <p className="exp-item__focus">{exp.focus}</p>
-              {clickable ? (
-                <span className="detail-cue">
-                  Read case study <span aria-hidden="true">→</span>
-                </span>
+      <ol className="timeline">
+        {EXPERIENCES.map((exp) => (
+          <li key={exp.id} className="timeline__item">
+            <p className="timeline__dates">{exp.dates}</p>
+            <div className="timeline__body">
+              <h3 className="timeline__role">
+                {exp.role} <span className="timeline__company">· {exp.company}</span>
+              </h3>
+              <ul className="timeline__highlights">
+                {exp.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {exp.tags.length ? (
+                <ul className="tags" aria-label="Technologies">
+                  {exp.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               ) : null}
-            </article>
-          );
-        })}
-      </div>
+              {exp.slug ? (
+                <button className="text-link" onClick={() => activate(exp.slug)}>
+                  Read the case study <span aria-hidden="true">→</span>
+                </button>
+              ) : null}
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
