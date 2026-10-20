@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alvin Lee – Resume</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.75in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Calibri, Carlito, sans-serif; font-size: 11pt; line-height: 1.2; color: #000; }
+  a { color: #0563c1; }
+  h1 { font-size: 22pt; font-weight: normal; text-align: center; line-height: 1.1; }
+  .contact { text-align: center; margin-bottom: 9pt; }
+  h2 { font-size: 11pt; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 1pt; margin: 8pt 0 4pt; }
+  .row { display: flex; justify-content: space-between; font-weight: bold; margin-top: 4pt; }
+  .row .org { font-weight: normal; font-style: italic; }
+  ul { margin: 2pt 0 0 0.25in; }
+  li { padding-left: 0.1in; margin-bottom: 1.5pt; }
+  p { margin-top: 2pt; }
+</style>
+</head>
+<body>
+<h1>Alvin Lee</h1>
+<div class="contact">alvinlee225@gmail.com | (908) 938-8937 | <a href="https://github.com/alvinlee00">GitHub</a> | <a href="http://www.linkedin.com/in/alvin-lee-2201081ab">LinkedIn</a> | <a href="https://leealvin.dev/">Portfolio</a></div>
+
+<h2>Technical Skills</h2>
+<p><b>Languages:</b> Python, SQL | <b>Cloud &amp; Infra:</b> AWS, Azure, Docker, Kubernetes, Terraform | <b>Data:</b> MongoDB/DocumentDB, Redis, Snowflake, DBT, Airflow | <b>Identity:</b> Auth0, OAuth 2.0/OIDC, JWT</p>
+
+<h2>Experience</h2>
+<div class="row"><span>Software Engineer, <span class="org">Blueflame AI</span></span><span>January 2026 – Present</span></div>
+<ul>
+  <li>Owned the Blueflame side of the Auth0 identity integration with Grata for a cross-company platform launch, going from no Auth0 experience to merged auth PRs in ~9 days: designed the shared-key identity model, a privileged M2M API, a login handoff across 4 repos, and org, user and seat provisioning.</li>
+  <li>Served as primary engineer for launch-window identity incidents, correlating AWS CloudWatch and Datadog logs across both systems; sized a production login loop (~1,900 logins at risk), ran the triage call, and traced ~670 duplicate accounts to a retry/timeout race, proposing idempotency keys.</li>
+  <li>Shipped Datasite VDR sharing to production on a fail-closed, least-privilege design applied consistently to search, RAG and code execution; closed 3 metadata leaks found in testing and ran a staged backfill (dry run, single-grant pilot, then 142 accounts and ~15K workspaces).</li>
+  <li>Built the permission foundation for Blueprints V3 (groups, ACLs, all-or-nothing bulk operations, edit-lock leases), benchmarking 10K blueprints across 15 folder levels and validating migrations on production data.</li>
+  <li>Cut a workspace membership query from 90 ms to 0.8 ms with a targeted index and removed a 7–8 s per&#8209;member scan; authored 160 PRs across 9 repos in 9 months.</li>
+</ul>
+
+<div class="row"><span>Software Engineer - Data Platform, <span class="org">PepsiCo</span></span><span>July 2023 – January 2026</span></div>
+<ul>
+  <li>Built a self-service data platform integrating Jira Service Management, GitHub webhooks and Snowflake APIs with Airflow orchestration, cutting manual provisioning from two days to under one hour.</li>
+  <li>Engineered a Snowflake MCP audit server and a Terraform + Azure Key Vault key-rotation pipeline that moved 200+ service accounts to RSA auth with zero downtime and rotates their keys monthly via CI/CD.</li>
+  <li>As global Terraform SME, designed reusable modules for 5 multi-region Snowflake accounts, reducing provisioning time by 60% and mentoring 15+ engineers on adoption.</li>
+  <li>Led data platform integration for an acquired brand, consolidating pipelines and enforcing PII compliance through secure hashing.</li>
+</ul>
+
+<div class="row"><span>Software Engineering Intern - Data Platform, <span class="org">PepsiCo</span></span><span>May 2022 – August 2022</span></div>
+<ul>
+  <li>Built a pipeline monitoring and alerting stack (Python + SQL) that reduced MTTR by ~40%.</li>
+</ul>
+
+<h2>Projects</h2>
+<div class="row"><span>Snowflake Analytics MCP Server (<a href="https://github.com/alvinlee00/mcp-snowflake-server">GitHub</a>)</span></div>
+<ul>
+  <li>Built a Python (FastMCP) server with 15+ tools for Snowflake cost optimization, security monitoring and anomaly detection, secured with RSA key auth, query validation and schema-level access controls.</li>
+</ul>
+<div class="row"><span>Syncify (<a href="https://github.com/alvinlee00/Syncify">GitHub</a>)</span></div>
+<ul>
+  <li>Built a Spotify-to-Apple Music migration service with ISRC matching and fuzzy fallback (~95% track match accuracy), OAuth 2.0, rate limiting and fault-tolerant sync for large playlists.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="row"><span>New York University: <span style="font-weight:normal">B.A. in Mathematics and Computer Science</span></span><span>May 2023</span></div>
+<p><b>Relevant Coursework:</b> Probability, Statistics, Linear Algebra, Optimization, Data Structures, Algorithms</p>
+</body>
+</html>
