@@ -11,7 +11,7 @@
 
   @page { size: Letter; margin: 0.55in 0.65in; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'EB Garamond Resume', Garamond, 'Times New Roman', serif; font-size: 11.5pt; line-height: 1.26; color: #000; }
+  body { font-family: 'EB Garamond Resume', Garamond, 'Times New Roman', serif; font-size: 11pt; line-height: 1.24; color: #000; }
   a { color: inherit; text-decoration: none; }
   b { font-weight: 700; }
 
@@ -21,7 +21,7 @@
   .contact span + span::before { content: "|"; margin: 0 6pt; }
 
   section { margin-top: 11pt; }
-  h2 { font-size: 11.5pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  h2 { font-size: 11pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
        border-bottom: 1pt solid #000; padding-bottom: 1pt; margin-bottom: 4pt; }
 
   .entry + .entry { margin-top: 7pt; }
@@ -49,12 +49,14 @@
     <div class="line"><b>Blueflame AI</b><span>Jan 2026 – Present</span></div>
     <div class="line sub"><span>Software Engineer</span></div>
     <ul>
-      <li>Led Blueflame’s side of the Auth0 identity integration with Grata for a cross-company platform launch: identity model, M2M API, login handoff and provisioning across 4 repos.</li>
-      <li>Went from no Auth0 experience to merged auth PRs in ~9 days; led identity incident response through launch.</li>
-      <li>Traced ~670 duplicate accounts to a retry/timeout race and sized a login loop affecting ~1,900 logins.</li>
-      <li>Shipped Datasite VDR sharing on a fail-closed, least-privilege design, with a staged backfill across 142 accounts and ~15K workspaces.</li>
-      <li>Built the Blueprints V3 permission layer (groups, ACLs, bulk operations), benchmarked at 10K blueprints.</li>
-      <li>Cut a workspace query from 90 ms to 0.8 ms with a targeted index; authored 160 PRs across 9 repos.</li>
+      <li>Led Blueflame’s engineering for the Auth0 identity integration with Grata, a cross-company platform launch, architecting the shared identity model, privileged M2M API and login handoff across 4 repositories.</li>
+      <li>Owned org, user and seat provisioning between both platforms, enforcing US/EU data residency and a Grata-first write contract that prevents orphaned users.</li>
+      <li>Served as incident lead for identity failures through launch, running triage on a production login loop affecting ~1,900 logins and coordinating fixes across both companies.</li>
+      <li>Root-caused ~670 duplicate production accounts to a retry/timeout race by correlating AWS CloudWatch and Datadog logs, and proposed idempotency keys to prevent recurrence.</li>
+      <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
+      <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
+      <li>Cut workspace query latency 99% (90 ms to 0.8 ms) via indexing and removed a 7–8 s per&#8209;member scan.</li>
+      <li>Authored the identity RFC, rollout runbook and API docs; shipped 160 PRs across 9 repositories and reviewed 47.</li>
     </ul>
   </div>
 
@@ -62,10 +64,9 @@
     <div class="line"><b>PepsiCo</b><span>Jul 2023 – Jan 2026</span></div>
     <div class="line sub"><span>Software Engineer, Data Platform</span></div>
     <ul>
-      <li>Built a self-service Snowflake provisioning platform (Jira, GitHub webhooks, Airflow), cutting turnaround from two days to under an hour.</li>
-      <li>Moved 200+ service accounts to RSA key auth with zero downtime, using an MCP audit server and automated key rotation in Terraform and Azure Key Vault.</li>
-      <li>As global Terraform SME, built reusable modules for 5 multi-region Snowflake accounts, cutting provisioning time 60% and mentoring 15+ engineers.</li>
-      <li>Led data platform integration for an acquired brand, consolidating pipelines and enforcing PII compliance.</li>
+      <li>Built self-service Snowflake provisioning (Jira, GitHub, Airflow), cutting turnaround from 2 days to under 1 hour.</li>
+      <li>Migrated 200+ service accounts to RSA key auth with zero downtime, backed by automated key rotation in Terraform and Azure Key Vault.</li>
+      <li>Served as global Terraform SME, building modules for 5 multi-region Snowflake accounts that cut provisioning time 60%; mentored 15+ engineers.</li>
     </ul>
     <div class="line" style="margin-top:3pt"><span class="sub">Software Engineering Intern, Data Platform</span><span>May 2022 – Aug 2022</span></div>
     <ul>
@@ -77,12 +78,12 @@
 <section>
   <h2>Projects</h2>
   <div class="entry">
-    <div class="line"><span><b>Snowflake Analytics MCP Server</b> | <span class="sub">Python, FastMCP, pandas</span></span><a href="https://github.com/alvinlee00/mcp-snowflake-server">github.com/alvinlee00/mcp-snowflake-server</a></div>
-    <ul><li>MCP server with 15+ tools for Snowflake cost, security and anomaly analysis, secured with RSA key auth.</li></ul>
+    <div class="line"><span><a href="https://github.com/alvinlee00/mcp-snowflake-server"><b>Snowflake Analytics MCP Server</b></a></span><span class="sub">Python, FastMCP, pandas</span></div>
+    <ul><li>Built an MCP server with 15+ tools for Snowflake cost, security and anomaly analysis, secured with RSA key auth.</li></ul>
   </div>
   <div class="entry">
-    <div class="line"><span><b>Syncify</b> | <span class="sub">Spotify and Apple Music APIs, OAuth 2.0</span></span><a href="https://github.com/alvinlee00/Syncify">github.com/alvinlee00/Syncify</a></div>
-    <ul><li>Playlist migration service with ISRC and fuzzy matching, reaching ~95% track match accuracy.</li></ul>
+    <div class="line"><span><a href="https://github.com/alvinlee00/Syncify"><b>Syncify</b></a></span><span class="sub">FastAPI, React, OAuth 2.0</span></div>
+    <ul><li>Built a Spotify-to-Apple Music migration service with ISRC and fuzzy matching, reaching ~95% track match accuracy.</li></ul>
   </div>
 </section>
 
