@@ -27,8 +27,10 @@ function About() {
             I enjoy math and software architecture, and I like learning things I don’t know yet.
           </p>
           <p className="about__body">
-            I studied math and computer science at NYU. At Blueflame I learned Auth0 from scratch to work
-            on the identity integration for a launch.
+            I studied math and computer science at NYU. Lately I’m most interested in building agents:
+            closed loops that run end to end with as little human intervention as possible. Forecasting
+            agents are where I’m exploring that. I’m interested in forecasting itself, and building the
+            loop that runs it is the other half of the project.
           </p>
           <p className="about__body">
             Outside work I’m into trading and prediction markets, and I take a lot of photos.
