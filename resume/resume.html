@@ -49,14 +49,13 @@
     <div class="line"><b>Blueflame AI</b><span>Jan 2026 – Present</span></div>
     <div class="line sub"><span>Software Engineer</span></div>
     <ul>
-      <li>Co-owned Blueflame’s side of the Auth0 identity integration with Grata for a cross-company platform launch, designing the shared identity model, privileged M2M API and login handoff across 4 repositories.</li>
-      <li>Wrote the Auth0 RFC that kept internal accounts as the identity and Auth0 as the credential, enabling reversible per-account migration, and pushed to shrink the shared identity API from ~28 methods to 7.</li>
-      <li>Drove the decision to link both systems on Grata’s stable UUID rather than Auth0 IDs, and wrapped the existing token path instead of rewriting login, removing regression risk before launch.</li>
-      <li>Owned org, user and seat provisioning between both platforms, enforcing US/EU data residency and a Grata-first write contract that prevents orphaned users.</li>
-      <li>Served as Blueflame’s primary contact for identity incidents through launch, running triage on a production login loop affecting ~1,900 logins and coordinating fixes across both companies.</li>
-      <li>Root-caused ~670 duplicate production accounts to a retry/timeout race by correlating AWS CloudWatch and Datadog logs, and proposed idempotency keys to prevent recurrence.</li>
+      <li>Co-owned Blueflame’s side of the Auth0 identity integration with Grata for a cross-company launch, delivering SSO login handoff, a privileged M2M API and org, user and seat provisioning across 4 repos.</li>
+      <li>Authored the identity RFC (Auth0 as credential, internal accounts as identity) for reversible per-account migration; drove keying both systems on Grata’s stable UUID and wrapping the existing login path to avoid regression risk at launch.</li>
+      <li>Designed provisioning to enforce US/EU data residency and to write to Grata before saving locally, so a rejected write can never leave an orphaned user.</li>
+      <li>Served as Blueflame’s primary contact for launch identity incidents: triaged a production login loop affecting ~1,900 logins and traced ~670 duplicate accounts to a retry/timeout race.</li>
       <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
       <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
+      <li>Raised the team’s review bar: reviewed 47 PRs across both companies, wrote rollout runbooks and API docs for Grata engineers, and built AI code-review tooling that encodes the team’s review standards.</li>
     </ul>
   </div>
 
@@ -90,6 +89,7 @@
 <section>
   <h2>Technical Skills</h2>
   <p><b>Languages:</b> Python, SQL</p>
+  <p><b>Systems:</b> Distributed systems, system design, access control (RBAC, ACLs), REST APIs, RAG, LLM tooling</p>
   <p><b>Infrastructure:</b> AWS, Azure, Terraform, Docker, Kubernetes</p>
   <p><b>Data:</b> MongoDB, DocumentDB, Redis, Snowflake, dbt, Airflow</p>
   <p><b>Identity:</b> Auth0, OAuth 2.0, OIDC, JWT</p>
