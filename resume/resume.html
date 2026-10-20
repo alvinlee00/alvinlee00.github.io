@@ -4,43 +4,39 @@
 <meta charset="utf-8">
 <title>Alvin Lee – Resume</title>
 <style>
-  @font-face { font-family: 'Inter Resume'; font-weight: 400; src: url('fonts/inter-latin-400-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Inter Resume'; font-weight: 600; src: url('fonts/inter-latin-600-normal.woff2') format('woff2'); }
-  @font-face { font-family: 'Inter Resume'; font-weight: 700; src: url('fonts/inter-latin-700-normal.woff2') format('woff2'); }
-  @page { size: Letter; margin: 0.55in 0.7in; }
+  @font-face { font-family: 'EB Garamond Resume'; font-weight: 400; src: url('fonts/eb-garamond-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'EB Garamond Resume'; font-weight: 400; font-style: italic; src: url('fonts/eb-garamond-latin-400-italic.woff2') format('woff2'); }
+  @font-face { font-family: 'EB Garamond Resume'; font-weight: 600; src: url('fonts/eb-garamond-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'EB Garamond Resume'; font-weight: 700; src: url('fonts/eb-garamond-latin-700-normal.woff2') format('woff2'); }
+
+  @page { size: Letter; margin: 0.55in 0.65in; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --ink: #1a1a1a; --muted: #5f6368; --accent: #1f4e79; --rule: #d0d4d9; }
-  body { font-family: 'Inter Resume', sans-serif; font-size: 9.5pt; line-height: 1.45; color: var(--ink); font-feature-settings: "tnum"; }
+  body { font-family: 'EB Garamond Resume', Garamond, 'Times New Roman', serif; font-size: 11.5pt; line-height: 1.26; color: #000; }
   a { color: inherit; text-decoration: none; }
+  b { font-weight: 700; }
 
-  header { margin-bottom: 14pt; }
-  h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
-  .contact { color: var(--muted); margin-top: 4pt; }
-  .contact span + span::before { content: "·"; margin: 0 6pt; color: var(--rule); }
+  header { text-align: center; }
+  h1 { font-size: 24pt; font-weight: 600; letter-spacing: 0.04em; line-height: 1.1; }
+  .contact { margin-top: 2pt; }
+  .contact span + span::before { content: "|"; margin: 0 6pt; }
 
-  section { margin-top: 13pt; }
-  h2 { font-size: 8.5pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
-       border-bottom: 0.75pt solid var(--rule); padding-bottom: 3pt; margin-bottom: 7pt; }
+  section { margin-top: 11pt; }
+  h2 { font-size: 11.5pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+       border-bottom: 1pt solid #000; padding-bottom: 1pt; margin-bottom: 4pt; }
 
-  .entry + .entry { margin-top: 9pt; }
-  .head { display: flex; justify-content: space-between; align-items: baseline; }
-  .role { font-weight: 600; font-size: 10pt; }
-  .org { font-weight: 400; color: var(--muted); }
-  .date { color: var(--muted); white-space: nowrap; }
+  .entry + .entry { margin-top: 7pt; }
+  .line { display: flex; justify-content: space-between; align-items: baseline; }
+  .sub { font-style: italic; }
 
-  ul { list-style: none; margin-top: 3pt; }
-  li { position: relative; padding-left: 11pt; }
-  li + li { margin-top: 2.5pt; }
-  li::before { content: ""; position: absolute; left: 1pt; top: 0.6em; width: 3.5pt; height: 3.5pt; border-radius: 50%; background: var(--accent); }
-
-  .skills { display: grid; grid-template-columns: 78pt 1fr; row-gap: 2pt; }
-  .skills dt { font-weight: 600; }
-  .stack { color: var(--muted); }
+  ul { margin: 1.5pt 0 0 15pt; }
+  li { padding-left: 3pt; }
+  li + li { margin-top: 1pt; }
+  p + p { margin-top: 1pt; }
 </style>
 </head>
 <body>
 <header>
-  <h1>Alvin Lee</h1>
+  <h1>ALVIN LEE</h1>
   <div class="contact">
     <span>alvinlee225@gmail.com</span><span>(908) 938-8937</span><span><a href="https://leealvin.dev/">leealvin.dev</a></span><span><a href="https://github.com/alvinlee00">github.com/alvinlee00</a></span><span><a href="http://www.linkedin.com/in/alvin-lee-2201081ab">LinkedIn</a></span>
   </div>
@@ -50,10 +46,11 @@
   <h2>Experience</h2>
 
   <div class="entry">
-    <div class="head"><span class="role">Software Engineer <span class="org">· Blueflame AI</span></span><span class="date">Jan 2026 – Present</span></div>
+    <div class="line"><b>Blueflame AI</b><span>Jan 2026 – Present</span></div>
+    <div class="line sub"><span>Software Engineer</span></div>
     <ul>
       <li>Led Blueflame’s side of the Auth0 identity integration with Grata for a cross-company platform launch: identity model, M2M API, login handoff and provisioning across 4 repos.</li>
-      <li>Went from no Auth0 experience to merged auth PRs in ~9 days, then became the primary responder for launch-window identity incidents.</li>
+      <li>Went from no Auth0 experience to merged auth PRs in ~9 days; led identity incident response through launch.</li>
       <li>Traced ~670 duplicate accounts to a retry/timeout race and sized a login loop affecting ~1,900 logins.</li>
       <li>Shipped Datasite VDR sharing on a fail-closed, least-privilege design, with a staged backfill across 142 accounts and ~15K workspaces.</li>
       <li>Built the Blueprints V3 permission layer (groups, ACLs, bulk operations), benchmarked at 10K blueprints.</li>
@@ -62,16 +59,15 @@
   </div>
 
   <div class="entry">
-    <div class="head"><span class="role">Software Engineer, Data Platform <span class="org">· PepsiCo</span></span><span class="date">Jul 2023 – Jan 2026</span></div>
+    <div class="line"><b>PepsiCo</b><span>Jul 2023 – Jan 2026</span></div>
+    <div class="line sub"><span>Software Engineer, Data Platform</span></div>
     <ul>
       <li>Built a self-service Snowflake provisioning platform (Jira, GitHub webhooks, Airflow), cutting turnaround from two days to under an hour.</li>
       <li>Moved 200+ service accounts to RSA key auth with zero downtime, using an MCP audit server and automated key rotation in Terraform and Azure Key Vault.</li>
       <li>As global Terraform SME, built reusable modules for 5 multi-region Snowflake accounts, cutting provisioning time 60% and mentoring 15+ engineers.</li>
+      <li>Led data platform integration for an acquired brand, consolidating pipelines and enforcing PII compliance.</li>
     </ul>
-  </div>
-
-  <div class="entry">
-    <div class="head"><span class="role">Software Engineering Intern, Data Platform <span class="org">· PepsiCo</span></span><span class="date">May 2022 – Aug 2022</span></div>
+    <div class="line" style="margin-top:3pt"><span class="sub">Software Engineering Intern, Data Platform</span><span>May 2022 – Aug 2022</span></div>
     <ul>
       <li>Built pipeline monitoring and alerting in Python and SQL that reduced MTTR by ~40%.</li>
     </ul>
@@ -81,28 +77,27 @@
 <section>
   <h2>Projects</h2>
   <div class="entry">
-    <div class="head"><span class="role"><a href="https://github.com/alvinlee00/mcp-snowflake-server">Snowflake Analytics MCP Server</a></span><span class="stack">Python, FastMCP, pandas</span></div>
+    <div class="line"><span><b>Snowflake Analytics MCP Server</b> | <span class="sub">Python, FastMCP, pandas</span></span><a href="https://github.com/alvinlee00/mcp-snowflake-server">github.com/alvinlee00/mcp-snowflake-server</a></div>
     <ul><li>MCP server with 15+ tools for Snowflake cost, security and anomaly analysis, secured with RSA key auth.</li></ul>
   </div>
   <div class="entry">
-    <div class="head"><span class="role"><a href="https://github.com/alvinlee00/Syncify">Syncify</a></span><span class="stack">Spotify &amp; Apple Music APIs, OAuth 2.0</span></div>
+    <div class="line"><span><b>Syncify</b> | <span class="sub">Spotify and Apple Music APIs, OAuth 2.0</span></span><a href="https://github.com/alvinlee00/Syncify">github.com/alvinlee00/Syncify</a></div>
     <ul><li>Playlist migration service with ISRC and fuzzy matching, reaching ~95% track match accuracy.</li></ul>
   </div>
 </section>
 
 <section>
-  <h2>Skills</h2>
-  <dl class="skills">
-    <dt>Languages</dt><dd>Python, SQL</dd>
-    <dt>Infrastructure</dt><dd>AWS, Azure, Terraform, Docker, Kubernetes</dd>
-    <dt>Data</dt><dd>MongoDB / DocumentDB, Redis, Snowflake, dbt, Airflow</dd>
-    <dt>Identity</dt><dd>Auth0, OAuth 2.0 / OIDC, JWT</dd>
-  </dl>
+  <h2>Technical Skills</h2>
+  <p><b>Languages:</b> Python, SQL</p>
+  <p><b>Infrastructure:</b> AWS, Azure, Terraform, Docker, Kubernetes</p>
+  <p><b>Data:</b> MongoDB, DocumentDB, Redis, Snowflake, dbt, Airflow</p>
+  <p><b>Identity:</b> Auth0, OAuth 2.0, OIDC, JWT</p>
 </section>
 
 <section>
   <h2>Education</h2>
-  <div class="head"><span class="role">New York University <span class="org">· B.A. Mathematics and Computer Science</span></span><span class="date">May 2023</span></div>
+  <div class="line"><b>New York University</b><span>May 2023</span></div>
+  <div class="line sub"><span>B.A. in Mathematics and Computer Science</span></div>
 </section>
 </body>
 </html>
