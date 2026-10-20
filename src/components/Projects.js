@@ -6,7 +6,7 @@ const PROJECTS = [
     id: 'forecasting',
     title: 'Forecasting agents',
     description:
-      'Forecasts Kalshi markets four times a day. A few research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and the market price stays hidden until the forecast is saved.',
+      'A closed loop that forecasts Kalshi markets four times a day with minimal human input. Research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and every forecast is scored against the market.',
     tech: 'Python, MCP, Claude',
     year: '2026',
     status: 'In progress'
