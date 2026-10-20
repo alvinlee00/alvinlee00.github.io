@@ -19,7 +19,7 @@ function Hero() {
             permissions and data infrastructure.
           </p>
           <p className="intro__aside">
-            Before that I was on PepsiCo’s data platform. On the side I’m building forecasting agents.
+            Before that I was on PepsiCo’s data platform. On the side I’m building agents that forecast Kalshi markets.
           </p>
         </div>
       </section>

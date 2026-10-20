@@ -5,8 +5,9 @@ const PROJECTS = [
   {
     id: 'forecasting',
     title: 'Forecasting agents',
-    description: 'Agents that research a question and produce a probability forecast.',
-    tech: 'Python, LLMs',
+    description:
+      'Forecasts Kalshi markets four times a day. A few research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and the market price stays hidden until the forecast is saved.',
+    tech: 'Python, MCP, Claude',
     year: '2026',
     status: 'In progress'
   },
