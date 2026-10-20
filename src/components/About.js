@@ -2,9 +2,9 @@ import React from 'react';
 import useReveal from '../useReveal';
 
 const FACTS = [
-  { k: 'Education', v: 'NYU, Math & CS' },
-  { k: 'Toolbox', v: 'Python, SQL, AWS, Terraform' },
-  { k: 'Off hours', v: 'Photography, cooking' }
+  { k: 'Education', v: 'NYU, B.A. Math & CS, 2023' },
+  { k: 'Day to day', v: 'Python, AWS, MongoDB, Redis, Terraform' },
+  { k: 'Side interests', v: 'Trading, prediction markets, photography' }
 ];
 
 function About() {
@@ -24,14 +24,14 @@ function About() {
         </div>
         <div className="about__copy">
           <p className="about__lead">
-            I studied mathematics and computer science at NYU, and I still approach systems the way I
-            approach a proof: state the invariants, then check every case.
+            I enjoy math and software architecture, and I like learning things I don’t know yet.
           </p>
           <p className="about__body">
-            Before Blueflame I spent two and a half years on PepsiCo’s data platform, making Snowflake
-            self-serve for the whole company. I care about small diffs, writing things down and proving a
-            fix before shipping it. Away from the keyboard you’ll find me behind a camera or in the
-            kitchen.
+            I studied math and computer science at NYU. At Blueflame I learned Auth0 from scratch to work
+            on the identity integration for a launch.
+          </p>
+          <p className="about__body">
+            Outside work I’m into trading and prediction markets, and I take a lot of photos.
           </p>
           <dl className="facts">
             {FACTS.map((fact) => (

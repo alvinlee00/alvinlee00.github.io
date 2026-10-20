@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
-  { id: 'work', label: 'Work' },
+  { id: 'work', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' }
 ];
 
 const DETAIL_NAV = {
-  syncify: { label: '← Work', target: 'work' },
-  snowflake: { label: '← Work', target: 'work' },
+  syncify: { label: '← Projects', target: 'work' },
+  snowflake: { label: '← Projects', target: 'work' },
   pepsico: { label: '← Experience', target: 'experience' },
   blueflame: { label: '← Experience', target: 'experience' }
 };

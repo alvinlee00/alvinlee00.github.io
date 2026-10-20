@@ -3,62 +3,83 @@ import useReveal from '../useReveal';
 
 const PROJECTS = [
   {
+    id: 'forecasting',
+    title: 'Forecasting agents',
+    description: 'Agents that research a question and produce a probability forecast.',
+    tech: 'Python, LLMs',
+    year: '2026',
+    status: 'In progress'
+  },
+  {
     id: 'snowflake',
-    title: 'Snowflake MCP Server',
-    meta: '2025 · Python, MCP',
-    description:
-      'Plain-language security audits, cost breakdowns and performance triage over Snowflake telemetry, with 15+ tools behind one MCP server.',
-    image: 'mcp-snowflake/placeholder_project_snowflake_mcp.png',
+    title: 'Snowflake MCP server',
+    description: 'An MCP server with 15+ tools for Snowflake cost, security and anomaly analysis.',
+    tech: 'Python, FastMCP, pandas',
+    year: '2025',
     slug: 'snowflake-mcp'
   },
   {
     id: 'syncify',
     title: 'Syncify',
-    meta: '2025 · FastAPI, React',
-    description:
-      'Keeps Spotify and Apple Music libraries in step using ISRC matching with fuzzy fallbacks, at ~95% track match accuracy.',
-    image: 'syncify/placeholder_project_syncify.png',
+    description: 'Moves Spotify playlists to Apple Music, matching ~95% of tracks by ISRC with fuzzy fallbacks.',
+    tech: 'FastAPI, React, OAuth 2.0',
+    year: '2025',
     slug: 'syncify'
   }
 ];
 
-const resolvePublicPath = (assetPath) => {
-  const base = process.env.PUBLIC_URL || '';
-  const normalized = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
-  return `${base}${normalized}`;
-};
+function ProjectRow({ project, onSelect }) {
+  const content = (
+    <>
+      <span className="exp-row__company">
+        {project.title}
+        {project.status ? <span className="badge">{project.status}</span> : null}
+      </span>
+      <span className="exp-row__role">
+        {project.description}
+        <span className="exp-row__blurb">{project.tech}</span>
+      </span>
+      <span className="exp-row__dates">{project.year}</span>
+      <span className="exp-row__arrow" aria-hidden="true">
+        {project.slug ? '→' : ''}
+      </span>
+    </>
+  );
+
+  if (!project.slug) {
+    return <div className="exp-row">{content}</div>;
+  }
+
+  return (
+    <button
+      className="exp-row is-link"
+      onClick={() => onSelect(project.slug)}
+      aria-label={`${project.title}: read more`}
+    >
+      {content}
+    </button>
+  );
+}
 
 function Projects({ onProjectSelect }) {
   const [ref, visible] = useReveal();
 
+  const activate = (slug) => {
+    if (onProjectSelect) {
+      onProjectSelect(slug);
+    }
+  };
+
   return (
     <section id="work" ref={ref} className={`section reveal ${visible ? 'visible' : ''}`}>
       <div className="section__head">
-        <h2 className="section__title">
-          Selected <em>work</em>
-        </h2>
+        <h2 className="section__title">Projects</h2>
         <span className="label">(02)</span>
       </div>
 
-      <div className="cards">
+      <div className="exp-list">
         {PROJECTS.map((project) => (
-          <button
-            key={project.id}
-            className="card"
-            onClick={() => onProjectSelect && onProjectSelect(project.slug)}
-          >
-            <span className="card__image">
-              <img src={resolvePublicPath(project.image)} alt="" />
-              <span className="card__cta" aria-hidden="true">
-                View case study ↗
-              </span>
-            </span>
-            <span className="card__row">
-              <span className="card__title">{project.title}</span>
-              <span className="card__meta">{project.meta}</span>
-            </span>
-            <span className="card__desc">{project.description}</span>
-          </button>
+          <ProjectRow key={project.id} project={project} onSelect={activate} />
         ))}
       </div>
     </section>
