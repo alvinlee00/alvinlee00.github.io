@@ -120,42 +120,42 @@ function QuestionPathFigure() {
   const id = 'fg1';
   return (
     <svg
-      viewBox="0 0 720 370"
+      viewBox="0 0 720 382"
       role="img"
       aria-label="One question's path. The question, with rules only, gets a baseline forecast, then research agents call as-of tool servers. Code combines and calibrates their answers and the forecast is saved. If the agents can't run, the baseline is saved instead. Only after the save is the market price read, the forecast paper traded, and scored when the question resolves."
     >
       <Markers id={id} />
 
-      <rect className="fg-zone" x="0" y="236" width="720" height="134" rx="18" />
-      <rect className="fg-zone-hatch" x="0" y="236" width="720" height="134" rx="18" fill={`url(#${id}-hatch)`} />
-      <Chip x={16} y={256} text="after the save · price visible" anchor="start" tone="ink" />
-      <Chip x={0} y={20} text="blind to the market" anchor="start" />
+      <rect className="fg-zone" x="0" y="236" width="720" height="136" rx="18" />
+      <rect className="fg-zone-hatch" x="0" y="236" width="720" height="136" rx="18" fill={`url(#${id}-hatch)`} />
+      <Chip x={20} y={266} text="after the save · price visible" anchor="start" tone="ink" />
+      <Chip x={8} y={20} text="blind to the market" anchor="start" />
 
-      <Edge id={id} tone="muted" dashed d="M217 72 C 217 22, 668 22, 668 68" />
-      <Chip x={442} y={35} text="fallback if the agents can’t run" />
+      <Edge id={id} tone="muted" dashed d="M208 72 C 208 22, 660 22, 660 68" />
+      <Chip x={434} y={35} text="fallback if the agents can’t run" />
 
-      <Node x={8} y={76} w={118} h={64} title="Question" sub="rules, close date" step="1" />
-      <Node x={156} y={76} w={122} h={64} title="Baseline" sub="fixed pipeline" step="2" />
-      <Node x={302} y={82} w={136} h={58} title="Research agents" sub="count set by code" tone="accent" stack step="3" />
-      <Node x={476} y={76} w={116} h={64} title="Combine" sub="log-odds, calibrate" step="4" />
-      <Node x={616} y={76} w={104} h={64} title="Saved" sub="the forecast" tone="ink" step="5" />
+      <Node x={8} y={76} w={112} h={64} title="Question" sub="rules, close date" step="1" />
+      <Node x={150} y={76} w={116} h={64} title="Baseline" sub="fixed pipeline" step="2" />
+      <Node x={298} y={82} w={136} h={58} title="Research agents" sub="count set by code" tone="accent" stack step="3" />
+      <Node x={474} y={76} w={110} h={64} title="Combine" sub="log-odds, calibrate" step="4" />
+      <Node x={608} y={76} w={104} h={64} title="Saved" sub="the forecast" tone="ink" step="5" />
 
-      <Edge id={id} d="M128 108 H152" />
-      <Edge id={id} d="M280 110 H298" />
-      <Edge id={id} d="M452 108 H472" />
-      <Edge id={id} d="M594 108 H612" />
+      <Edge id={id} d="M122 108 H146" />
+      <Edge id={id} d="M268 110 H294" />
+      <Edge id={id} d="M450 108 H470" />
+      <Edge id={id} d="M586 108 H604" />
 
-      <Node x={306} y={170} w={128} h={38} title="As-of tools" tone="card" pill />
-      <Edge id={id} tone="accent" both d="M370 142 V166" />
+      <Node x={302} y={170} w={128} h={38} title="As-of tools" tone="card" pill />
+      <Edge id={id} tone="accent" both d="M366 142 V166" />
 
-      <Edge id={id} d="M668 142 C 668 200, 668 230, 668 276" />
+      <Edge id={id} d="M660 142 C 660 216, 370 214, 370 290" />
 
-      <Node x={250} y={280} w={140} h={56} title="Scored" sub="vs. outcome, vs. market" />
-      <Node x={436} y={280} w={128} h={56} title="Market price" tone="ghost" />
-      <Node x={610} y={280} w={110} h={56} title="Paper trade" />
-      <Edge id={id} d="M566 308 H606" />
-      <Edge id={id} d="M665 338 C 665 366, 320 366, 320 340" />
-      <Chip x={492} y={358} text="at resolution" />
+      <Node x={150} y={296} w={116} h={56} title="Market price" tone="ghost" />
+      <Node x={310} y={296} w={120} h={56} title="Paper trade" />
+      <Node x={560} y={296} w={140} h={56} title="Scored" sub="vs. outcome, vs. market" />
+      <Edge id={id} d="M268 324 H306" />
+      <Edge id={id} d="M432 324 H556" />
+      <Chip x={494} y={306} text="at resolution" />
     </svg>
   );
 }
@@ -166,7 +166,7 @@ function ToolServerFigure() {
   const dropped = [430, 462, 486];
   return (
     <svg
-      viewBox="0 0 720 270"
+      viewBox="0 14 720 254"
       role="img"
       aria-label="An as-of tool server. The date is fixed when an agent run starts. The agent calls a tool, the server fetches from free public sources, keeps only what is dated before the as-of time, records the call in a ledger, and returns the result. In replay, the server answers from the ledger with the network off."
     >
@@ -241,7 +241,7 @@ function LoopFigure() {
   };
   return (
     <svg
-      viewBox="0 0 720 430"
+      viewBox="0 12 720 400"
       role="img"
       aria-label="The improvement loop, drawn as a ring. The live cycle writes every forecast to a record, which the market's outcomes grade. A builder reads where the agents lost and makes a new version, backtested on past questions. A verifier on a different model re-tests it on fresh questions and either promotes it to the live cycle or rolls back."
     >
