@@ -33,8 +33,8 @@ function BlueflameExperience({ onBack }) {
         <h1 className="project-detail__title">Blueflame AI</h1>
         <p className="project-detail__lede">
           Blueflame builds AI tools for investment firms. Most of my second half there went into one
-          problem: letting customers of Blueflame and Grata use both products with one login, when each
-          product has its own backend and its own user database.
+          problem: letting customers use Blueflame and Grata, a deal-sourcing product we launched alongside,
+          with one login, when each product has its own backend and its own user database.
         </p>
         <div className="project-detail__summary">
           <div>
