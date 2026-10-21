@@ -33,30 +33,52 @@ const DECISIONS = [
   }
 ];
 
-function Arrowheads({ id }) {
+const chipWidth = (text) => text.length * 6.1 + 18;
+
+function Markers({ id }) {
   return (
     <defs>
-      <marker
-        id={id}
-        viewBox="0 0 10 10"
-        refX="9"
-        refY="5"
-        markerWidth="6"
-        markerHeight="6"
-        orient="auto-start-reverse"
-      >
-        <path className="fg-head" d="M0,0 L10,5 L0,10 z" />
-      </marker>
+      {['ink', 'accent', 'muted'].map((tone) => (
+        <marker
+          key={tone}
+          id={`${id}-${tone}`}
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="8"
+          markerHeight="8"
+          orient="auto-start-reverse"
+        >
+          <path className={`fg-head fg-head--${tone}`} d="M2,1.5 L8,5 L2,8.5" />
+        </marker>
+      ))}
+      <pattern id={`${id}-hatch`} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line className="fg-hatch" x1="0" y1="0" x2="0" y2="8" />
+      </pattern>
     </defs>
   );
 }
 
-function Box({ x, y, w, h, title, sub, variant }) {
+function Node({ x, y, w, h, title, sub, tone = 'card', step, stack, pill }) {
   const lines = Array.isArray(sub) ? sub : sub ? [sub] : [];
   const top = y + h / 2 - (lines.length * 14) / 2 + 4;
+  const r = pill ? h / 2 : 14;
   return (
-    <g>
-      <rect className={`fg-box${variant ? ` fg-box--${variant}` : ''}`} x={x} y={y} width={w} height={h} />
+    <g className={`fg-node fg-node--${tone}`}>
+      {stack
+        ? [12, 6].map((d) => (
+            <rect key={d} className="fg-shape fg-shape--back" x={x + d} y={y - d} width={w} height={h} rx={r} />
+          ))
+        : null}
+      <rect className="fg-shape" x={x} y={y} width={w} height={h} rx={r} />
+      {step ? (
+        <g>
+          <circle className="fg-step" cx={x + 2} cy={y + 2} r="10" />
+          <text className="fg-step-text" x={x + 2} y={y + 5.5} textAnchor="middle">
+            {step}
+          </text>
+        </g>
+      ) : null}
       <text className="fg-title" x={x + w / 2} y={top} textAnchor="middle">
         {title}
       </text>
@@ -69,158 +91,184 @@ function Box({ x, y, w, h, title, sub, variant }) {
   );
 }
 
+function Chip({ x, y, text, tone = 'plain', anchor = 'middle' }) {
+  const w = chipWidth(text);
+  const left = anchor === 'start' ? x : x - w / 2;
+  return (
+    <g className={`fg-chip fg-chip--${tone}`}>
+      <rect x={left} y={y - 10} width={w} height="20" rx="10" />
+      <text x={left + w / 2} y={y + 3.5} textAnchor="middle">
+        {text}
+      </text>
+    </g>
+  );
+}
+
+function Edge({ d, id, tone = 'ink', dashed, both }) {
+  const marker = `url(#${id}-${tone})`;
+  return (
+    <path
+      className={`fg-edge fg-edge--${tone}${dashed ? ' fg-edge--dashed' : ''}`}
+      d={d}
+      markerEnd={marker}
+      markerStart={both ? marker : undefined}
+    />
+  );
+}
+
 function QuestionPathFigure() {
-  const m = 'url(#fg-a1)';
+  const id = 'fg1';
   return (
     <svg
-      viewBox="0 0 680 320"
+      viewBox="0 0 720 370"
       role="img"
-      aria-label="One question's path. The question, with rules only, gets a baseline forecast, then research agents call as-of tool servers. Code combines and calibrates their answers and the forecast is saved. If the agents can't run, the baseline is saved instead. Below the blind boundary the market price is read, the forecast is paper traded, and it is scored when the question resolves."
+      aria-label="One question's path. The question, with rules only, gets a baseline forecast, then research agents call as-of tool servers. Code combines and calibrates their answers and the forecast is saved. If the agents can't run, the baseline is saved instead. Only after the save is the market price read, the forecast paper traded, and scored when the question resolves."
     >
-      <Arrowheads id="fg-a1" />
+      <Markers id={id} />
 
-      <path className="fg-line fg-line--dashed" d="M195 44 V18 H625 V42" markerEnd={m} />
-      <text className="fg-label" x="410" y="12" textAnchor="middle">
-        fallback if the agents can’t run
-      </text>
+      <rect className="fg-zone" x="0" y="236" width="720" height="134" rx="18" />
+      <rect className="fg-zone-hatch" x="0" y="236" width="720" height="134" rx="18" fill={`url(#${id}-hatch)`} />
+      <Chip x={16} y={256} text="after the save · price visible" anchor="start" tone="ink" />
+      <Chip x={0} y={20} text="blind to the market" anchor="start" />
 
-      <Box x={0} y={44} w={110} h={56} title="Question" sub="rules, close date" />
-      <Box x={140} y={44} w={110} h={56} title="Baseline" sub="fixed pipeline" />
-      <Box x={280} y={44} w={120} h={56} title="Research agents" sub="count set by code" variant="strong" />
-      <Box x={430} y={44} w={110} h={56} title="Combine" sub="log-odds, calibrate" />
-      <Box x={570} y={44} w={110} h={56} title="Saved forecast" variant="strong" />
+      <Edge id={id} tone="muted" dashed d="M217 72 C 217 22, 668 22, 668 68" />
+      <Chip x={442} y={35} text="fallback if the agents can’t run" />
 
-      <line className="fg-line" x1="110" y1="72" x2="138" y2="72" markerEnd={m} />
-      <line className="fg-line" x1="250" y1="72" x2="278" y2="72" markerEnd={m} />
-      <line className="fg-line" x1="400" y1="72" x2="428" y2="72" markerEnd={m} />
-      <line className="fg-line" x1="540" y1="72" x2="568" y2="72" markerEnd={m} />
+      <Node x={8} y={76} w={118} h={64} title="Question" sub="rules, close date" step="1" />
+      <Node x={156} y={76} w={122} h={64} title="Baseline" sub="fixed pipeline" step="2" />
+      <Node x={302} y={82} w={136} h={58} title="Research agents" sub="count set by code" tone="accent" stack step="3" />
+      <Node x={476} y={76} w={116} h={64} title="Combine" sub="log-odds, calibrate" step="4" />
+      <Node x={616} y={76} w={104} h={64} title="Saved" sub="the forecast" tone="ink" step="5" />
 
-      <Box x={280} y={132} w={120} h={44} title="As-of tools" variant="soft" />
-      <line className="fg-line" x1="325" y1="100" x2="325" y2="130" markerEnd={m} markerStart={m} />
-      <text className="fg-label" x="333" y="120">
-        calls
-      </text>
+      <Edge id={id} d="M128 108 H152" />
+      <Edge id={id} d="M280 110 H298" />
+      <Edge id={id} d="M452 108 H472" />
+      <Edge id={id} d="M594 108 H612" />
 
-      <line className="fg-boundary" x1="0" y1="206" x2="680" y2="206" />
-      <text className="fg-label fg-label--ink" x="0" y="198">
-        BLIND BOUNDARY · the market price is read only below this line
-      </text>
+      <Node x={306} y={170} w={128} h={38} title="As-of tools" tone="card" pill />
+      <Edge id={id} tone="accent" both d="M370 142 V166" />
 
-      <line className="fg-line" x1="625" y1="100" x2="625" y2="232" markerEnd={m} />
+      <Edge id={id} d="M668 142 C 668 200, 668 230, 668 276" />
 
-      <Box x={280} y={234} w={120} h={50} title="Scored" sub="vs. outcome, vs. market" />
-      <Box x={430} y={234} w={110} h={50} title="Market price" variant="soft" />
-      <Box x={570} y={234} w={110} h={50} title="Paper trade" />
-
-      <line className="fg-line" x1="540" y1="259" x2="568" y2="259" markerEnd={m} />
-      <path className="fg-line" d="M625 284 V306 H340 V286" markerEnd={m} />
-      <text className="fg-label" x="482" y="300" textAnchor="middle">
-        at resolution
-      </text>
+      <Node x={250} y={280} w={140} h={56} title="Scored" sub="vs. outcome, vs. market" />
+      <Node x={436} y={280} w={128} h={56} title="Market price" tone="ghost" />
+      <Node x={610} y={280} w={110} h={56} title="Paper trade" />
+      <Edge id={id} d="M566 308 H606" />
+      <Edge id={id} d="M665 338 C 665 366, 320 366, 320 340" />
+      <Chip x={492} y={358} text="at resolution" />
     </svg>
   );
 }
 
 function ToolServerFigure() {
-  const m = 'url(#fg-a2)';
+  const id = 'fg2';
+  const kept = [222, 258, 300, 334, 366];
+  const dropped = [430, 462, 486];
   return (
     <svg
-      viewBox="0 0 680 230"
+      viewBox="0 0 720 270"
       role="img"
-      aria-label="An as-of tool server. When an agent run starts, the server is launched with a fixed date. The agent calls a tool, the server fetches from the source, drops anything dated after the as-of time, records the call in a ledger, and returns the result. In replay, the server answers from the ledger with the network off."
+      aria-label="An as-of tool server. The date is fixed when an agent run starts. The agent calls a tool, the server fetches from free public sources, keeps only what is dated before the as-of time, records the call in a ledger, and returns the result. In replay, the server answers from the ledger with the network off."
     >
-      <Arrowheads id="fg-a2" />
+      <Markers id={id} />
 
-      <Box x={0} y={50} w={120} h={56} title="Agent" sub="no web, no price" />
-      <rect className="fg-box fg-box--strong" x={200} y={24} width={220} height={108} />
-      <text className="fg-title" x="310" y="50" textAnchor="middle">
+      <Node x={6} y={98} w={124} h={64} title="Agent" sub="no web, no price" tone="accent" stack />
+      <Edge id={id} tone="accent" d="M134 112 C 156 96, 166 96, 184 100" />
+      <Chip x={158} y={78} text="call" tone="accent" />
+      <Edge id={id} d="M184 160 C 166 164, 156 164, 134 148" />
+      <Chip x={150} y={186} text="result" />
+
+      <rect className="fg-container" x="190" y="24" width="320" height="222" rx="20" />
+      <text className="fg-title fg-title--left" x="212" y="56">
         As-of tool server
       </text>
-      <text className="fg-sub" x="310" y="74" textAnchor="middle">
-        date fixed at launch
+      <Chip x={418} y={51} text="date fixed at launch" tone="accent" />
+
+      <line className="fg-axis" x1="212" y1="140" x2="492" y2="140" />
+      {kept.map((cx) => (
+        <circle key={cx} className="fg-dot" cx={cx} cy="140" r="6" />
+      ))}
+      {dropped.map((cx) => (
+        <g key={cx}>
+          <circle className="fg-dot fg-dot--dropped" cx={cx} cy="140" r="6" />
+          <line className="fg-strike" x1={cx - 5} y1="145" x2={cx + 5} y2="135" />
+        </g>
+      ))}
+      <line className="fg-cut" x1="398" y1="98" x2="398" y2="182" />
+      <Chip x={398} y={92} text="as-of" tone="accent" />
+      <text className="fg-sub" x="294" y="174" textAnchor="middle">
+        kept
       </text>
-      <text className="fg-sub" x="310" y="90" textAnchor="middle">
-        drops anything after it
+      <text className="fg-sub" x="458" y="174" textAnchor="middle">
+        dropped
       </text>
-      <text className="fg-sub" x="310" y="106" textAnchor="middle">
-        strips talk of market prices
+      <text className="fg-sub fg-sub--left" x="212" y="222">
+        Also strips any mention of market prices.
       </text>
 
-      <Box x={500} y={24} w={180} h={44} title="Sources" sub="free public data" />
-      <Box x={500} y={88} w={180} h={44} title="Ledger" sub="every call and result" variant="soft" />
-      <Box x={200} y={176} w={220} h={44} title="Run starts" sub="sets the as-of time" variant="soft" />
-
-      <line className="fg-line" x1="120" y1="68" x2="198" y2="68" markerEnd={m} />
-      <text className="fg-label" x="159" y="61" textAnchor="middle">
-        call
+      <Node x={570} y={40} w={146} h={58} title="Sources" sub="free public data" />
+      <Node x={570} y={150} w={146} h={58} title="Ledger" sub="every call and result" tone="soft" />
+      <Edge id={id} both d="M512 76 C 536 70, 546 69, 566 69" />
+      <Chip x={538} y={52} text="fetch" />
+      <Edge id={id} d="M512 172 C 536 178, 546 179, 566 179" />
+      <Chip x={538} y={198} text="record" />
+      <text className="fg-note fg-note--small" x="643" y="236" textAnchor="middle">
+        replays read from here,
       </text>
-      <line className="fg-line" x1="200" y1="92" x2="122" y2="92" markerEnd={m} />
-      <text className="fg-label" x="159" y="108" textAnchor="middle">
-        result
-      </text>
-      <line className="fg-line" x1="420" y1="46" x2="498" y2="46" markerEnd={m} markerStart={m} />
-      <text className="fg-label" x="459" y="39" textAnchor="middle">
-        fetch
-      </text>
-      <line className="fg-line" x1="420" y1="110" x2="498" y2="110" markerEnd={m} />
-      <text className="fg-label" x="459" y="103" textAnchor="middle">
-        record
-      </text>
-      <line className="fg-line" x1="310" y1="176" x2="310" y2="134" markerEnd={m} />
-
-      <text className="fg-label" x="590" y="152" textAnchor="middle">
-        replay: answer from here,
-      </text>
-      <text className="fg-label" x="590" y="166" textAnchor="middle">
+      <text className="fg-note fg-note--small" x="643" y="254" textAnchor="middle">
         network off
       </text>
     </svg>
   );
 }
 
+const RING = { cx: 360, cy: 216, rx: 232, ry: 150 };
+const onRing = (deg) => {
+  const t = (deg * Math.PI) / 180;
+  return [RING.cx + RING.rx * Math.cos(t), RING.cy - RING.ry * Math.sin(t)].map((v) => Math.round(v));
+};
+const ringArc = (from, to) => {
+  const [x1, y1] = onRing(from);
+  const [x2, y2] = onRing(to);
+  return `M${x1} ${y1} A ${RING.rx} ${RING.ry} 0 0 1 ${x2} ${y2}`;
+};
+
 function LoopFigure() {
-  const m = 'url(#fg-a3)';
+  const id = 'fg3';
+  const chip = (deg, text, tone) => {
+    const [x, y] = onRing(deg);
+    return <Chip x={x} y={y} text={text} tone={tone} />;
+  };
   return (
     <svg
-      viewBox="0 0 680 300"
+      viewBox="0 0 720 430"
       role="img"
-      aria-label="The improvement loop. The live cycle writes every forecast to a record, which the market's outcomes grade. A builder reads where the agents missed and makes a new version, backtested on past questions. A verifier on a different model re-tests it on fresh questions and either promotes it to the live cycle or rolls back."
+      aria-label="The improvement loop, drawn as a ring. The live cycle writes every forecast to a record, which the market's outcomes grade. A builder reads where the agents lost and makes a new version, backtested on past questions. A verifier on a different model re-tests it on fresh questions and either promotes it to the live cycle or rolls back."
     >
-      <Arrowheads id="fg-a3" />
+      <Markers id={id} />
+      <ellipse className="fg-track" cx={RING.cx} cy={RING.cy} rx={RING.rx} ry={RING.ry} />
 
-      <Box x={20} y={30} w={220} h={76} title="Live cycle" sub={['forecasts a batch of questions', 'a few times a day']} variant="strong" />
-      <Box x={440} y={30} w={220} h={76} title="Record" sub={['each forecast, the baseline', 'beside it, and the outcome']} />
-      <Box x={440} y={194} w={220} h={76} title="Builder" sub={['makes a new version from misses,', 'backtests it on past questions']} />
-      <Box x={20} y={194} w={220} h={76} title="Verifier" sub={['a different model re-tests it', 'on questions it hasn’t seen']} />
+      <Edge id={id} tone="accent" d={ringArc(64, 26)} />
+      <Edge id={id} tone="accent" d={ringArc(-26, -64)} />
+      <Edge id={id} tone="accent" d={ringArc(-116, -154)} />
+      <Edge id={id} tone="accent" d={ringArc(154, 116)} />
+      {chip(45, 'forecasts')}
+      {chip(-45, 'where it lost')}
+      {chip(-135, 'nominate if it wins')}
+      {chip(135, 'promote')}
 
-      <line className="fg-line" x1="240" y1="68" x2="438" y2="68" markerEnd={m} />
-      <text className="fg-label" x="339" y="60" textAnchor="middle">
-        forecasts
-      </text>
-      <line className="fg-line" x1="550" y1="106" x2="550" y2="192" markerEnd={m} />
-      <text className="fg-label" x="560" y="146">
-        where it lost
-      </text>
-      <text className="fg-label" x="560" y="160">
-        to the market
-      </text>
-      <line className="fg-line" x1="440" y1="232" x2="242" y2="232" markerEnd={m} />
-      <text className="fg-label" x="341" y="224" textAnchor="middle">
-        nominate if it wins
-      </text>
-      <line className="fg-line" x1="90" y1="194" x2="90" y2="108" markerEnd={m} />
-      <text className="fg-label" x="82" y="154" textAnchor="end">
-        promote
-      </text>
-      <line className="fg-line fg-line--dashed" x1="170" y1="194" x2="170" y2="108" markerEnd={m} />
-      <text className="fg-label" x="178" y="154">
-        roll back
-      </text>
+      <Edge id={id} tone="muted" dashed d="M206 186 C 236 156, 262 130, 284 102" />
+      <Chip x={258} y={168} text="or roll back" />
 
-      <text className="fg-note" x="341" y="150" textAnchor="middle">
+      <Node x={272} y={30} w={176} h={70} title="Live cycle" sub={['forecasts a batch of', 'questions, a few times a day']} tone="ink" step="1" />
+      <Node x={506} y={182} w={176} h={70} title="Record" sub={['each forecast, the baseline,', 'and the outcome']} step="2" />
+      <Node x={272} y={332} w={176} h={70} title="Builder" sub={['new version from misses,', 'backtested on past questions']} tone="accent" step="3" />
+      <Node x={38} y={182} w={176} h={70} title="Verifier" sub={['a different model re-tests', 'it on unseen questions']} tone="accent" step="4" />
+
+      <text className="fg-note" x="372" y="210" textAnchor="middle">
         the market’s outcome
       </text>
-      <text className="fg-note" x="341" y="166" textAnchor="middle">
+      <text className="fg-note" x="372" y="232" textAnchor="middle">
         grades every forecast
       </text>
     </svg>
@@ -293,7 +341,7 @@ function ForecastingProject({ onBack }) {
         </p>
         <Figure
           number="1"
-          caption=" Everything above the dashed line is blind to the market. The baseline is only read by code, to decide how much effort a question gets and to stand in if the agents can’t run."
+          caption=" Everything outside the shaded area is blind to the market. The baseline is only read by code, to decide how much effort a question gets and to stand in if the agents can’t run."
         >
           <QuestionPathFigure />
         </Figure>

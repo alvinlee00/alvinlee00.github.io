@@ -796,16 +796,38 @@ em {
   }
 }
 
-/* Inline figures on detail pages: plain line diagrams, like figures in an article */
+/* Inline figures on detail pages: soft, rounded diagrams with one warm accent */
 
 .project-detail__figure {
+  --fig-accent: #c15f3c;
+  --fig-accent-soft: #f6e6dd;
+  --fig-card: #fbfbf9;
+  --fig-frame: #ecebe6;
   margin: 40px 0 0;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .project-detail__figure {
+    --fig-accent: #e0896a;
+    --fig-accent-soft: #2e1f19;
+    --fig-card: #161616;
+    --fig-frame: #121212;
+  }
+}
+
+:root[data-theme='dark'] .project-detail__figure {
+  --fig-accent: #e0896a;
+  --fig-accent-soft: #2e1f19;
+  --fig-card: #161616;
+  --fig-frame: #121212;
+}
+
 .project-detail__figure-art {
-  padding: 28px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: 32px 28px;
+  border-radius: 24px;
+  background-color: var(--fig-frame);
+  background-image: radial-gradient(var(--line) 1px, transparent 1.2px);
+  background-size: 18px 18px;
   overflow-x: auto;
 }
 
@@ -817,7 +839,8 @@ em {
 }
 
 .project-detail__figure figcaption {
-  margin-top: 12px;
+  margin-top: 14px;
+  padding: 0 4px;
   font-size: 14px;
   line-height: 1.6;
   color: var(--muted);
@@ -826,29 +849,77 @@ em {
 .project-detail__figure figcaption .label {
   display: inline;
   margin-right: 4px;
-  color: var(--ink);
+  color: var(--fig-accent);
 }
 
-.fg-box {
-  fill: var(--bg);
-  stroke: var(--ink);
-  stroke-width: 1;
-}
-
-.fg-box--strong {
-  stroke-width: 1.8;
-}
-
-.fg-box--soft {
-  fill: var(--surface);
+.fg-shape {
+  fill: var(--fig-card);
   stroke: var(--line);
+  stroke-width: 1;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.06)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+}
+
+.fg-shape--back {
+  filter: none;
+  opacity: 0.55;
+}
+
+.fg-node--ink .fg-shape {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+
+.fg-node--ink .fg-title {
+  fill: var(--bg);
+}
+
+.fg-node--ink .fg-sub {
+  fill: var(--bg);
+  opacity: 0.7;
+}
+
+.fg-node--accent .fg-shape {
+  fill: var(--fig-accent-soft);
+  stroke: var(--fig-accent);
+}
+
+.fg-node--accent .fg-title {
+  fill: var(--fig-accent);
+}
+
+.fg-node--soft .fg-shape {
+  fill: var(--surface);
+}
+
+.fg-node--ghost .fg-shape {
+  fill: transparent;
+  stroke: var(--muted);
+  stroke-dasharray: 4 4;
+  filter: none;
+}
+
+.fg-step {
+  fill: var(--fig-accent);
+}
+
+.fg-step-text {
+  fill: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
 }
 
 .fg-title {
   fill: var(--ink);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.fg-title--left,
+.fg-sub--left {
+  text-anchor: start;
 }
 
 .fg-sub {
@@ -857,46 +928,150 @@ em {
   font-size: 11px;
 }
 
-.fg-label {
+.fg-chip rect {
+  fill: var(--fig-card);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.fg-chip text {
   fill: var(--muted);
   font-family: var(--mono);
   font-size: 10px;
 }
 
-.fg-label--ink {
+.fg-chip--accent rect {
+  fill: var(--fig-accent-soft);
+  stroke: var(--fig-accent);
+}
+
+.fg-chip--accent text {
+  fill: var(--fig-accent);
+}
+
+.fg-chip--ink rect {
   fill: var(--ink);
-  letter-spacing: 0.04em;
+  stroke: var(--ink);
+}
+
+.fg-chip--ink text {
+  fill: var(--bg);
+}
+
+.fg-edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+
+.fg-edge--accent {
+  stroke: var(--fig-accent);
+  stroke-width: 1.8;
+}
+
+.fg-edge--muted {
+  stroke: var(--muted);
+}
+
+.fg-edge--dashed {
+  stroke-dasharray: 2 5;
+  stroke-width: 1.6;
+}
+
+.fg-head {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fg-head--ink {
+  stroke: var(--ink);
+}
+
+.fg-head--accent {
+  stroke: var(--fig-accent);
+}
+
+.fg-head--muted {
+  stroke: var(--muted);
+}
+
+.fg-zone {
+  fill: var(--fig-card);
+  stroke: var(--line);
+  opacity: 0.6;
+}
+
+.fg-zone-hatch {
+  opacity: 0.5;
+}
+
+.fg-hatch {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.fg-container {
+  fill: var(--fig-card);
+  stroke: var(--line);
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.06));
+}
+
+.fg-axis {
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.fg-dot {
+  fill: var(--ink);
+}
+
+.fg-dot--dropped {
+  fill: var(--fig-card);
+  stroke: var(--faint);
+  stroke-width: 1.5;
+}
+
+.fg-strike {
+  stroke: var(--faint);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.fg-cut {
+  stroke: var(--fig-accent);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 4;
+  stroke-linecap: round;
+}
+
+.fg-track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 10;
+  opacity: 0.6;
 }
 
 .fg-note {
   fill: var(--body);
   font-family: var(--serif);
   font-style: italic;
-  font-size: 15px;
+  font-size: 19px;
 }
 
-.fg-line {
-  stroke: var(--ink);
-  stroke-width: 1;
-  fill: none;
-}
-
-.fg-line--dashed {
-  stroke: var(--muted);
-  stroke-dasharray: 4 3;
-}
-
-.fg-boundary {
-  stroke: var(--ink);
-  stroke-width: 1;
-  stroke-dasharray: 6 4;
-}
-
-.fg-head {
-  fill: var(--ink);
+.fg-note--small {
+  font-size: 14px;
 }
 
 @media (max-width: 640px) {
+  .project-detail__figure-art {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+
   .project-detail__figure-art svg {
     min-width: 560px;
   }
