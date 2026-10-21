@@ -4,7 +4,7 @@ import useReveal from '../useReveal';
 const FACTS = [
   { k: 'Education', v: 'NYU, B.A. Math & CS, 2023' },
   { k: 'Day to day', v: 'Python, AWS, MongoDB, Redis, Terraform' },
-  { k: 'Side interests', v: 'Trading, prediction markets, photography' }
+  { k: 'Side interests', v: 'Trading, prediction markets, photography, coffee, cooking' }
 ];
 
 function About() {
@@ -33,7 +33,9 @@ function About() {
             loop that runs it is the other half of the project.
           </p>
           <p className="about__body">
-            Outside work I’m into trading and prediction markets, and I take a lot of photos.
+            Outside work I’m into trading and prediction markets, and I take a lot of photos. I also like
+            coffee and cooking. Right now that means light roasts and turbo shots, and getting better at
+            sauces.
           </p>
           <dl className="facts">
             {FACTS.map((fact) => (
