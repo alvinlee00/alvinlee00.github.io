@@ -10,13 +10,15 @@ import SyncifyProject from './components/SyncifyProject';
 import SnowflakeProject from './components/SnowflakeProject';
 import PepsicoExperience from './components/PepsicoExperience';
 import BlueflameExperience from './components/BlueflameExperience';
+import ForecastingProject from './components/ForecastingProject';
 
 const ROUTES = {
   HOME: 'home',
   SYNCIFY: 'syncify',
   SNOWFLAKE: 'snowflake',
   PEPSICO: 'pepsico',
-  BLUEFLAME: 'blueflame'
+  BLUEFLAME: 'blueflame',
+  FORECASTING: 'forecasting'
 };
 
 const buildPath = (route) => {
@@ -25,6 +27,9 @@ const buildPath = (route) => {
   }
   if (route === ROUTES.SNOWFLAKE) {
     return '/projects/snowflake-mcp';
+  }
+  if (route === ROUTES.FORECASTING) {
+    return '/projects/forecasting';
   }
   if (route === ROUTES.PEPSICO) {
     return '/experience/pepsico';
@@ -42,6 +47,9 @@ const getRouteFromPath = () => {
   }
   if (path.startsWith('/projects/snowflake-mcp')) {
     return ROUTES.SNOWFLAKE;
+  }
+  if (path.startsWith('/projects/forecasting')) {
+    return ROUTES.FORECASTING;
   }
   if (path.startsWith('/experience/pepsico')) {
     return ROUTES.PEPSICO;
@@ -121,7 +129,8 @@ function App() {
               onProjectSelect={(slug) => {
                 const routeMap = {
                   syncify: ROUTES.SYNCIFY,
-                  'snowflake-mcp': ROUTES.SNOWFLAKE
+                  'snowflake-mcp': ROUTES.SNOWFLAKE,
+                  forecasting: ROUTES.FORECASTING
                 };
                 const targetRoute = routeMap[slug];
                 if (targetRoute) {
@@ -149,6 +158,10 @@ function App() {
 
         {currentRoute === ROUTES.SNOWFLAKE ? (
           <SnowflakeProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'work' })} />
+        ) : null}
+
+        {currentRoute === ROUTES.FORECASTING ? (
+          <ForecastingProject onBack={() => navigateTo(ROUTES.HOME, { scrollTarget: 'work' })} />
         ) : null}
 
         {currentRoute === ROUTES.BLUEFLAME ? (
