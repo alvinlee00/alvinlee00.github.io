@@ -49,13 +49,13 @@
     <div class="line"><b>Blueflame AI</b><span>Jan 2026 – Present</span></div>
     <div class="line sub"><span>Software Engineer</span></div>
     <ul>
-      <li>Led Blueflame’s side of the design to unify accounts with Grata, a separate product with its own backend, so users of either or both kept their existing logins; shipped on the joint launch date.</li>
+      <li>Led Blueflame’s side of the design to unify accounts with Grata, a sister product with its own backend, so users of either or both kept their existing logins; shipped on the joint launch date.</li>
       <li>Designed write-once account links that reject conflicts instead of overwriting, so a bad match can’t attach one person’s data to someone else’s account.</li>
       <li>Gave every shared field a single owner across the two systems, and let access revocations sync while grants never do, so a sync bug can’t hand anyone new access.</li>
       <li>Drove the pushback in cross-team design disputes, cutting a proposed shared user service to three operations and blocking org-mapping changes until paired customers couldn’t be relinked.</li>
       <li>Served as Blueflame’s primary contact for launch identity incidents, tracing duplicate accounts to a cross-company retry/timeout race by correlating AWS and Datadog logs.</li>
-      <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
-      <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
+      <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged, dry-run-first production backfill.</li>
+      <li>Architected the permission foundation (groups, ACLs, atomic bulk operations) for a new workflow product, validated at 10K items and against production-scale migrations.</li>
     </ul>
   </div>
 
