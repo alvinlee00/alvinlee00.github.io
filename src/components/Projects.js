@@ -9,7 +9,8 @@ const PROJECTS = [
       'A closed loop that forecasts Kalshi markets four times a day with minimal human input. Research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and every forecast is scored against the market.',
     tech: 'Python, MCP, Claude',
     year: '2026',
-    status: 'In progress'
+    status: 'In progress',
+    slug: 'forecasting'
   },
   {
     id: 'snowflake',

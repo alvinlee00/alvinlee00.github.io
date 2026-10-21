@@ -795,3 +795,109 @@ em {
     animation: none;
   }
 }
+
+/* Inline figures on detail pages: plain line diagrams, like figures in an article */
+
+.project-detail__figure {
+  margin: 40px 0 0;
+}
+
+.project-detail__figure-art {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.project-detail__figure-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.project-detail__figure figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.project-detail__figure figcaption .label {
+  display: inline;
+  margin-right: 4px;
+  color: var(--ink);
+}
+
+.fg-box {
+  fill: var(--bg);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.fg-box--strong {
+  stroke-width: 1.8;
+}
+
+.fg-box--soft {
+  fill: var(--surface);
+  stroke: var(--line);
+}
+
+.fg-title {
+  fill: var(--ink);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fg-sub {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+}
+
+.fg-label {
+  fill: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.fg-label--ink {
+  fill: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+.fg-note {
+  fill: var(--body);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+}
+
+.fg-line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  fill: none;
+}
+
+.fg-line--dashed {
+  stroke: var(--muted);
+  stroke-dasharray: 4 3;
+}
+
+.fg-boundary {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+}
+
+.fg-head {
+  fill: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .project-detail__figure-art svg {
+    min-width: 560px;
+  }
+}
