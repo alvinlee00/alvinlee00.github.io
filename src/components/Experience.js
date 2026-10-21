@@ -6,7 +6,7 @@ const EXPERIENCES = [
     id: 'blueflame',
     company: 'Blueflame AI',
     role: 'Software Engineer',
-    blurb: 'Identity, access and permissions for AI tools in finance',
+    blurb: 'Account merging across two products, and permissions for AI tools in finance',
     dates: '2026 — Now',
     slug: 'blueflame'
   },
