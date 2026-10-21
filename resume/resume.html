@@ -49,13 +49,13 @@
     <div class="line"><b>Blueflame AI</b><span>Jan 2026 – Present</span></div>
     <div class="line sub"><span>Software Engineer</span></div>
     <ul>
-      <li>Led Blueflame’s side of the account-merge design with Grata for a joint launch, defining how Grata-only, Blueflame-only and shared users are matched across two separate backends and keep their existing logins, through two weeks of cross-company design reviews.</li>
-      <li>Designed write-once identity linking keyed on Grata’s stable user ID that refuses conflicts instead of overwriting, so a bad match can never attach one person’s data to another account.</li>
-      <li>Defined field ownership and write ordering between the systems: one owner per shared field, revocations sync but grants never do, seat limits commit locally only after Grata accepts, and US/EU data stays in its region.</li>
-      <li>Led Blueflame’s pushback in cross-team design disputes, narrowing a proposed cross-system user service to three operations and holding Grata’s org-mapping changes until safety fixes were adopted.</li>
+      <li>Led Blueflame’s side of the design to unify accounts with Grata, a sister product with its own backend, so users of either or both kept their existing logins; shipped on the joint launch date.</li>
+      <li>Designed write-once account links that reject conflicts instead of overwriting, so a bad match can’t attach one person’s data to someone else’s account.</li>
+      <li>Gave every shared field a single owner across the two systems, and let access revocations sync while grants never do, so a sync bug can’t hand anyone new access.</li>
+      <li>Drove the pushback in cross-team design disputes, cutting a proposed shared user service to three operations and blocking org-mapping changes until paired customers couldn’t be relinked.</li>
       <li>Served as Blueflame’s primary contact for launch identity incidents, tracing duplicate accounts to a cross-company retry/timeout race by correlating AWS and Datadog logs.</li>
-      <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged backfill of 142 accounts and ~15K workspaces.</li>
-      <li>Architected the permission foundation for Blueprints V3 (groups, ACLs, atomic bulk operations), validated at 10K blueprints and against production-scale migrations.</li>
+      <li>Designed and shipped Datasite VDR sharing with a fail-closed, least-privilege access model enforced across search, RAG and code execution, rolled out through a staged, dry-run-first production backfill.</li>
+      <li>Architected the permission foundation (groups, ACLs, atomic bulk operations) for a new workflow product, validated at 10K items and against production-scale migrations.</li>
     </ul>
   </div>
 
