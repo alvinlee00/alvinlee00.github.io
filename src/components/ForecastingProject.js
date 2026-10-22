@@ -576,16 +576,24 @@ function ForecastingProject({ onBack }) {
       <section className="project-detail__section">
         <h3>Results so far</h3>
         <p>
+          Short version: the agents are still well behind Kalshi. I’m keeping the numbers here anyway, because
+          this page is partly a log of the project, and the starting point is part of that.
+        </p>
+        <p>
           Every live forecast is scored with the Brier score once its question settles: the squared distance
           between the probability and what happened, so 0 is perfect and always saying 50% scores 0.25. Each
           version was scored on the questions it forecast while it was live, and those sets differ, so the fair
-          comparison is the gap to Kalshi’s own price on the same questions. The gap was 0.085 to 0.099 for
-          the earlier versions with enough settled questions, and is 0.039 for the research agents. The market
-          is still ahead.
+          comparison is the gap to Kalshi’s own price on the same questions. A positive gap means the forecaster
+          did worse than the market; zero would be a tie.
+        </p>
+        <p>
+          Every version so far has a positive gap. The research agents are the closest, at +0.039, which still
+          means their forecasts carry clearly more error than the market price. Most of the step down came from
+          switching to research agents. The improvement loop hasn’t produced a measurable gain on top of that yet.
         </p>
         <Figure
           number="4"
-          caption=" Live forecasts only, not backtests, as of October 22, 2026. Each forecast was saved before the price was read; Kalshi’s score uses its midpoint at that moment. Counts are questions that have settled. The second version ran for one day, so its 17 questions say little. For the research agents, the gap’s 90% interval is +0.022 to +0.055, clear of the fixed pipeline’s +0.075 to +0.123."
+          caption=" Live forecasts only, not backtests, as of October 22, 2026. Gap is the forecaster’s Brier minus Kalshi’s; above zero means behind the market. Each forecast was saved before the price was read; Kalshi’s score uses its midpoint at that moment. Counts are questions that have settled. The second version ran for one day, so its 17 questions say little. For the research agents, the gap’s 90% interval is +0.022 to +0.055, clear of the fixed pipeline’s +0.075 to +0.123."
         >
           <ScoreFigure />
           <ScoreFigureCompact />
@@ -595,10 +603,10 @@ function ForecastingProject({ onBack }) {
       <section className="project-detail__section">
         <h3>Where it stands</h3>
         <p>
-          The research agents are the best version so far, and still behind the market. The next question is
-          whether new versions keep closing that gap on questions nobody tuned on, which takes months of
-          settled questions to answer. Next I want to see whether a lead agent that plans its own research
-          does better than the fixed roles, and to widen the tools for topics where the agents keep losing.
+          The goal is to close that gap, then beat the market, on questions nobody tuned on. I don’t know yet
+          whether that’s reachable. Next I want to see whether a lead agent that plans its own research does
+          better than the fixed roles, and to widen the tools for topics where the agents keep losing. I’ll
+          update the chart as new versions go live.
         </p>
       </section>
 
