@@ -275,6 +275,188 @@ function LoopFigure() {
   );
 }
 
+// Live record from the forecasting-agents scoreboard (docs/team/FORECASTER.md), as of 2026-10-22 14:00 UTC.
+// Resolved questions with a Kalshi midpoint saved at forecast time; gap = forecaster Brier minus Kalshi Brier.
+const RECORD = [
+  { title: 'Single call', sub: 'GPT-5.6 Luna', dates: 'to Sep 22', n: 189, brier: 0.206, market: 0.121, gap: '+0.085' },
+  { title: 'Single call', sub: 'GPT-6 Luna', dates: 'Sep 22–23', n: 17, brier: 0.299, market: 0.067, gap: '+0.232', thin: true },
+  { title: 'Fixed pipeline', sub: 'Claude, no tools', dates: 'Sep 23–30', n: 231, brier: 0.226, market: 0.128, gap: '+0.099' },
+  { title: 'Research agents', sub: 'Claude, as-of tools', dates: 'Sep 30 – now', n: 328, brier: 0.186, market: 0.147, gap: '+0.039' }
+];
+
+const SCORE_LABEL = `Brier score of each live forecaster version against Kalshi's price on the same questions, lower is better. ${RECORD.map(
+  (r) => `${r.title} (${r.sub}, ${r.dates}, ${r.n} questions): ${r.brier} vs Kalshi ${r.market}, gap ${r.gap}.`
+).join(' ')}`;
+
+const PLOT = { left: 64, right: 704, top: 66, bottom: 296, max: 0.32 };
+const yAt = (v) => PLOT.bottom - (v / PLOT.max) * (PLOT.bottom - PLOT.top);
+const colX = (i) => PLOT.left + ((i + 0.5) * (PLOT.right - PLOT.left)) / RECORD.length - 14;
+
+function ScoreFigure() {
+  const id = 'fg4';
+  const points = RECORD.map((r, i) => `${colX(i)},${yAt(r.brier).toFixed(1)}`).join(' ');
+  return (
+    <svg
+      className="fg-wide"
+      viewBox="0 0 720 392"
+      role="img"
+      aria-label={SCORE_LABEL}
+    >
+      <Markers id={id} />
+
+      <Chip x={8} y={20} text="live forecasts · blind to price" anchor="start" tone="ink" />
+      <g className="fg-key">
+        <circle className="fg-mark fg-mark--agent" cx="498" cy="20" r="5.5" />
+        <text className="fg-sub fg-sub--left" x="510" y="24">
+          forecaster
+        </text>
+        <circle className="fg-mark fg-mark--market" cx="592" cy="20" r="5.5" />
+        <text className="fg-sub fg-sub--left" x="604" y="24">
+          Kalshi, same questions
+        </text>
+      </g>
+
+      {[0, 0.1, 0.2, 0.3].map((v) => (
+        <g key={v}>
+          <line className="fg-grid" x1={PLOT.left} y1={yAt(v)} x2={PLOT.right} y2={yAt(v)} />
+          <text className="fg-tick" x={PLOT.left - 12} y={yAt(v) + 3.5} textAnchor="end">
+            {v.toFixed(2)}
+          </text>
+        </g>
+      ))}
+      <text className="fg-tick" x={PLOT.left - 12} y={PLOT.top - 22} textAnchor="end">
+        Brier
+      </text>
+      <text className="fg-tick" x={PLOT.left - 12} y={PLOT.top - 10} textAnchor="end">
+        ↓ better
+      </text>
+
+      <polyline className="fg-trend" points={points} />
+
+      {RECORD.map((r, i) => {
+        const x = colX(i);
+        const yA = yAt(r.brier);
+        const yM = yAt(r.market);
+        const mid = (yA + yM) / 2;
+        return (
+          <g key={r.sub} className={r.thin ? 'fg-col fg-col--thin' : 'fg-col'}>
+            <rect className="fg-gap" x={x - 7} y={yA - 7} width="14" height={yM - yA + 14} rx="7" />
+            <circle className="fg-mark fg-mark--market" cx={x} cy={yM} r="6" />
+            <circle className="fg-mark fg-mark--agent" cx={x} cy={yA} r="6.5" />
+            <text className="fg-value" x={x - 14} y={yA + 4} textAnchor="end">
+              {r.brier.toFixed(3)}
+            </text>
+            <text className="fg-value fg-value--muted" x={x - 14} y={yM + 4} textAnchor="end">
+              {r.market.toFixed(3)}
+            </text>
+            <Chip x={x + 14} y={mid} text={`gap ${r.gap}`} anchor="start" tone={i === RECORD.length - 1 ? 'accent' : 'plain'} />
+          </g>
+        );
+      })}
+
+      {RECORD.map((r, i) => {
+        const x = colX(i) + 14;
+        return (
+          <g key={`label-${r.sub}`}>
+            <circle className="fg-step" cx={x} cy="322" r="10" />
+            <text className="fg-step-text" x={x} y="325.5" textAnchor="middle">
+              {i + 1}
+            </text>
+            <text className="fg-title" x={x} y="354" textAnchor="middle">
+              {r.title}
+            </text>
+            <text className="fg-sub" x={x} y="370" textAnchor="middle">
+              {r.sub}
+            </text>
+            <text className="fg-sub" x={x} y="385" textAnchor="middle">
+              {r.dates} · {r.n} questions
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+const ROW = { left: 24, right: 290, max: 0.3, top: 62, height: 96 };
+const xAt = (v) => ROW.left + (v / ROW.max) * (ROW.right - ROW.left);
+
+function ScoreFigureCompact() {
+  const bottom = ROW.top + RECORD.length * ROW.height;
+  return (
+    <svg className="fg-compact" viewBox={`0 0 340 ${bottom + 44}`} role="img" aria-label={SCORE_LABEL}>
+      <Chip x={4} y={14} text="live forecasts · blind to price" anchor="start" tone="ink" />
+      <circle className="fg-mark fg-mark--agent" cx="10" cy="42" r="5.5" />
+      <text className="fg-sub fg-sub--left" x="22" y="46">
+        forecaster
+      </text>
+      <circle className="fg-mark fg-mark--market" cx="104" cy="42" r="5.5" />
+      <text className="fg-sub fg-sub--left" x="116" y="46">
+        Kalshi, same questions
+      </text>
+
+      {[0, 0.1, 0.2, 0.3].map((v) => (
+        <g key={v}>
+          {RECORD.map((r, i) => (
+            <line
+              key={r.sub}
+              className="fg-grid"
+              x1={xAt(v)}
+              y1={ROW.top + i * ROW.height + 48}
+              x2={xAt(v)}
+              y2={ROW.top + i * ROW.height + 80}
+            />
+          ))}
+          <text className="fg-tick" x={xAt(v)} y={bottom + 20} textAnchor="middle">
+            {v.toFixed(2)}
+          </text>
+        </g>
+      ))}
+      <text className="fg-tick" x={ROW.right} y={bottom + 38} textAnchor="end">
+        Brier · lower is better
+      </text>
+
+      {RECORD.map((r, i) => {
+        const y0 = ROW.top + i * ROW.height;
+        const y = y0 + 64;
+        const xA = xAt(r.brier);
+        const xM = xAt(r.market);
+        const gap = `gap ${r.gap}`;
+        return (
+          <g key={r.sub} className={r.thin ? 'fg-col fg-col--thin' : 'fg-col'}>
+            <circle className="fg-step" cx="14" cy={y0 + 18} r="10" />
+            <text className="fg-step-text" x="14" y={y0 + 21.5} textAnchor="middle">
+              {i + 1}
+            </text>
+            <text className="fg-title fg-title--left" x="32" y={y0 + 23}>
+              {r.title}
+            </text>
+            <Chip
+              x={336 - chipWidth(gap)}
+              y={y0 + 18}
+              text={gap}
+              anchor="start"
+              tone={i === RECORD.length - 1 ? 'accent' : 'plain'}
+            />
+            <text className="fg-sub fg-sub--left" x="32" y={y0 + 40}>
+              {r.sub} · {r.dates} · {r.n} questions
+            </text>
+            <rect className="fg-gap" x={xM - 7} y={y - 7} width={xA - xM + 14} height="14" rx="7" />
+            <circle className="fg-mark fg-mark--market" cx={xM} cy={y} r="6" />
+            <circle className="fg-mark fg-mark--agent" cx={xA} cy={y} r="6.5" />
+            <text className="fg-value fg-value--muted" x={xM - 12} y={y + 4} textAnchor="end">
+              {r.market.toFixed(3)}
+            </text>
+            <text className="fg-value" x={xA + 12} y={y + 4} textAnchor="start">
+              {r.brier.toFixed(3)}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 function Figure({ number, caption, children }) {
   return (
     <figure className="project-detail__figure">
@@ -392,13 +574,39 @@ function ForecastingProject({ onBack }) {
       </section>
 
       <section className="project-detail__section">
+        <h3>Results so far</h3>
+        <p>
+          Short version: the agents are still well behind Kalshi. I’m keeping the numbers here anyway, because
+          this page is partly a log of the project, and the starting point is part of that.
+        </p>
+        <p>
+          Every live forecast is scored with the Brier score once its question settles: the squared distance
+          between the probability and what happened, so 0 is perfect and always saying 50% scores 0.25. Each
+          version was scored on the questions it forecast while it was live, and those sets differ, so the fair
+          comparison is the gap to Kalshi’s own price on the same questions. A positive gap means the forecaster
+          did worse than the market; zero would be a tie.
+        </p>
+        <p>
+          Every version so far has a positive gap. The research agents are the closest, at +0.039, which still
+          means their forecasts carry clearly more error than the market price. Most of the step down came from
+          switching to research agents. The improvement loop hasn’t produced a measurable gain on top of that yet.
+        </p>
+        <Figure
+          number="4"
+          caption=" Live forecasts only, not backtests, as of October 22, 2026. Gap is the forecaster’s Brier minus Kalshi’s; above zero means behind the market. Each forecast was saved before the price was read; Kalshi’s score uses its midpoint at that moment. Counts are questions that have settled. The second version ran for one day, so its 17 questions say little. For the research agents, the gap’s 90% interval is +0.022 to +0.055, clear of the fixed pipeline’s +0.075 to +0.123."
+        >
+          <ScoreFigure />
+          <ScoreFigureCompact />
+        </Figure>
+      </section>
+
+      <section className="project-detail__section">
         <h3>Where it stands</h3>
         <p>
-          The agentic version went live this fall, and I’m still measuring it. The honest question is whether
-          the agents beat the simple baseline, and then the market, on questions nobody tuned on. That takes a
-          few months of resolved questions to answer. Next I want to see whether a lead agent that plans its
-          own research does better than the fixed roles, and to widen the tools for topics where the agents
-          keep losing.
+          The goal is to close that gap, then beat the market, on questions nobody tuned on. I don’t know yet
+          whether that’s reachable. Next I want to see whether a lead agent that plans its own research does
+          better than the fixed roles, and to widen the tools for topics where the agents keep losing. I’ll
+          update the chart as new versions go live.
         </p>
       </section>
 
