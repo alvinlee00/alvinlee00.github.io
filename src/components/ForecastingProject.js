@@ -275,20 +275,22 @@ function LoopFigure() {
   );
 }
 
-// Live record from the forecasting-agents scoreboard (docs/team/FORECASTER.md), as of 2026-10-22 14:00 UTC.
+// Live record from the forecasting-agents scoreboard (docs/team/FORECASTER.md), as of 2026-10-22 14:00 UTC,
+// with the research-agent rows from the Kalshi gap tracker as of 2026-10-28 13:50 UTC.
 // Resolved questions with a Kalshi midpoint saved at forecast time; gap = forecaster Brier minus Kalshi Brier.
 const RECORD = [
   { title: 'Single call', sub: 'GPT-5.6 Luna', dates: 'to Sep 22', n: 189, brier: 0.206, market: 0.121, gap: '+0.085' },
   { title: 'Single call', sub: 'GPT-6 Luna', dates: 'Sep 22–23', n: 17, brier: 0.299, market: 0.067, gap: '+0.232', thin: true },
   { title: 'Fixed pipeline', sub: 'Claude, no tools', dates: 'Sep 23–30', n: 231, brier: 0.226, market: 0.128, gap: '+0.099' },
-  { title: 'Research agents', sub: 'Claude, as-of tools', dates: 'Sep 30 – now', n: 328, brier: 0.186, market: 0.147, gap: '+0.039' }
+  { title: 'Research agents', sub: 'Claude, as-of tools', dates: 'Sep 30 – Oct 9', n: 236, brier: 0.179, market: 0.119, gap: '+0.060' },
+  { title: 'Current design', sub: 'new question choice', dates: 'Oct 10 – now', n: 181, brier: 0.204, market: 0.192, gap: '+0.012' }
 ];
 
 const SCORE_LABEL = `Brier score of each live forecaster version against Kalshi's price on the same questions, lower is better. ${RECORD.map(
   (r) => `${r.title} (${r.sub}, ${r.dates}, ${r.n} questions): ${r.brier} vs Kalshi ${r.market}, gap ${r.gap}.`
 ).join(' ')}`;
 
-const PLOT = { left: 64, right: 704, top: 66, bottom: 296, max: 0.32 };
+const PLOT = { left: 64, right: 784, top: 66, bottom: 296, max: 0.32 };
 const yAt = (v) => PLOT.bottom - (v / PLOT.max) * (PLOT.bottom - PLOT.top);
 const colX = (i) => PLOT.left + ((i + 0.5) * (PLOT.right - PLOT.left)) / RECORD.length - 14;
 
@@ -298,7 +300,7 @@ function ScoreFigure() {
   return (
     <svg
       className="fg-wide"
-      viewBox="0 0 720 392"
+      viewBox="0 0 800 406"
       role="img"
       aria-label={SCORE_LABEL}
     >
@@ -306,12 +308,12 @@ function ScoreFigure() {
 
       <Chip x={8} y={20} text="live forecasts · blind to price" anchor="start" tone="ink" />
       <g className="fg-key">
-        <circle className="fg-mark fg-mark--agent" cx="498" cy="20" r="5.5" />
-        <text className="fg-sub fg-sub--left" x="510" y="24">
+        <circle className="fg-mark fg-mark--agent" cx="578" cy="20" r="5.5" />
+        <text className="fg-sub fg-sub--left" x="590" y="24">
           forecaster
         </text>
-        <circle className="fg-mark fg-mark--market" cx="592" cy="20" r="5.5" />
-        <text className="fg-sub fg-sub--left" x="604" y="24">
+        <circle className="fg-mark fg-mark--market" cx="672" cy="20" r="5.5" />
+        <text className="fg-sub fg-sub--left" x="684" y="24">
           Kalshi, same questions
         </text>
       </g>
@@ -338,15 +340,16 @@ function ScoreFigure() {
         const yA = yAt(r.brier);
         const yM = yAt(r.market);
         const mid = (yA + yM) / 2;
+        const nudge = yM - yA < 14 ? 6 : 0;
         return (
           <g key={r.sub} className={r.thin ? 'fg-col fg-col--thin' : 'fg-col'}>
             <rect className="fg-gap" x={x - 7} y={yA - 7} width="14" height={yM - yA + 14} rx="7" />
             <circle className="fg-mark fg-mark--market" cx={x} cy={yM} r="6" />
             <circle className="fg-mark fg-mark--agent" cx={x} cy={yA} r="6.5" />
-            <text className="fg-value" x={x - 14} y={yA + 4} textAnchor="end">
+            <text className="fg-value" x={x - 14} y={yA + 4 - nudge} textAnchor="end">
               {r.brier.toFixed(3)}
             </text>
-            <text className="fg-value fg-value--muted" x={x - 14} y={yM + 4} textAnchor="end">
+            <text className="fg-value fg-value--muted" x={x - 14} y={yM + 4 + nudge} textAnchor="end">
               {r.market.toFixed(3)}
             </text>
             <Chip x={x + 14} y={mid} text={`gap ${r.gap}`} anchor="start" tone={i === RECORD.length - 1 ? 'accent' : 'plain'} />
@@ -369,7 +372,10 @@ function ScoreFigure() {
               {r.sub}
             </text>
             <text className="fg-sub" x={x} y="385" textAnchor="middle">
-              {r.dates} · {r.n} questions
+              {r.dates}
+            </text>
+            <text className="fg-sub" x={x} y="400" textAnchor="middle">
+              {r.n} questions
             </text>
           </g>
         );
@@ -576,8 +582,9 @@ function ForecastingProject({ onBack }) {
       <section className="project-detail__section">
         <h3>Results so far</h3>
         <p>
-          Short version: the agents are still well behind Kalshi. I’m keeping the numbers here anyway, because
-          this page is partly a log of the project, and the starting point is part of that.
+          Short version: the agents started well behind Kalshi and are now about level with it, not ahead. I’m
+          keeping the early numbers here anyway, because this page is partly a log of the project, and the
+          starting point is part of that.
         </p>
         <p>
           Every live forecast is scored with the Brier score once its question settles: the squared distance
@@ -587,13 +594,16 @@ function ForecastingProject({ onBack }) {
           did worse than the market; zero would be a tie.
         </p>
         <p>
-          Every version so far has a positive gap. The research agents are the closest, at +0.039, which still
-          means their forecasts carry clearly more error than the market price. Most of the step down came from
-          switching to research agents. The improvement loop hasn’t produced a measurable gain on top of that yet.
+          Every version so far has a positive gap. The early versions were clearly behind, and switching to
+          research agents was the first big step down. Since the current design went live on October 10, the gap
+          is +0.012 on 181 settled questions, and its 90% interval runs from −0.013 to +0.037, so it’s level with
+          the market within noise. That design also stopped forecasting markets priced under 10¢ or over 90¢,
+          where the market is hard to beat, so some of the narrowing likely comes from which questions it takes
+          on. It isn’t steady yet either: the questions that settled in the last seven days came in +0.040 behind.
         </p>
         <Figure
           number="4"
-          caption=" Live forecasts only, not backtests, as of October 22, 2026. Gap is the forecaster’s Brier minus Kalshi’s; above zero means behind the market. Each forecast was saved before the price was read; Kalshi’s score uses its midpoint at that moment. Counts are questions that have settled. The second version ran for one day, so its 17 questions say little. For the research agents, the gap’s 90% interval is +0.022 to +0.055, clear of the fixed pipeline’s +0.075 to +0.123."
+          caption=" Live forecasts only, not backtests, as of October 28, 2026. Gap is the forecaster’s Brier minus Kalshi’s; above zero means behind the market. Each forecast was saved before the price was read; Kalshi’s score uses its midpoint at that moment. Counts are questions that have settled. The second version ran for one day, so its 17 questions say little. The current design skips markets priced under 10¢ or over 90¢, so both its scores run higher; compare the gaps, not the raw scores. Its 90% interval comes from resampling whole events."
         >
           <ScoreFigure />
           <ScoreFigureCompact />
@@ -603,9 +613,9 @@ function ForecastingProject({ onBack }) {
       <section className="project-detail__section">
         <h3>Where it stands</h3>
         <p>
-          The goal is to close that gap, then beat the market, on questions nobody tuned on. I don’t know yet
-          whether that’s reachable. Next I want to see whether a lead agent that plans its own research does
-          better than the fixed roles, and to widen the tools for topics where the agents keep losing. I’ll
+          The gap is close to zero now. The goal is to hold it there, then beat the market, on questions nobody
+          tuned on. I don’t know yet whether that’s reachable. Next I want to see whether a lead agent that plans
+          its own research does better than the fixed roles, and to widen the tools for topics where the agents keep losing. I’ll
           update the chart as new versions go live.
         </p>
       </section>
