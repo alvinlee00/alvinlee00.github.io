@@ -6,7 +6,7 @@ const PROJECTS = [
     id: 'forecasting',
     title: 'Forecasting agents',
     description:
-      'A closed loop that forecasts Kalshi markets four times a day with minimal human input. Research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and every forecast is scored against the market.',
+      'A closed loop that forecasts Kalshi markets four times a day with minimal human input. Research agents gather data through tools that only see what existed at forecast time, code combines and calibrates their answers, and every forecast is scored against the market. Results so far: across 181 settled questions since its Oct 10 design, its Brier score is 0.204 against Kalshi’s 0.192, a gap within the margin of error.',
     tech: 'Python, MCP, Claude',
     year: '2026',
     status: 'In progress',
